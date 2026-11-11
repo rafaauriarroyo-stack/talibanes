@@ -252,7 +252,7 @@ const DEFAULT_CASTIGOS = [
   'Un día entero firmando cada mensaje con "perdón por fallar 🙏"',
   'Le toca organizar y reservar el próximo plan'
 ];
-const DEFAULT_CONTADORES = [{k:'cubatas',e:'🥃',n:'Cubatas'},{k:'salidas',e:'🪩',n:'Salir de fiesta'},{k:'besos',e:'💋',n:'Besos'}];
+const DEFAULT_CONTADORES = [{k:'fiestas',e:'🎉',n:'Fiestas'},{k:'salidas',e:'🪩',n:'Salir de fiesta'},{k:'besos',e:'💋',n:'Besos'}];
 const REACTS = ['🔥','😂','💀','👑','🤡','❤️'];
 const STICKERS = ['🔥','😂','💀','👑','🍺','🍻','🎉','😎','🤡','💩','❤️','🥵','🫡','👀','🤙','🍕','⭐','💯','🐐','🌚','😈','🥳','🤯','😭','💪','🙏','✌️','🫶','☀️','🌈','⚡','💥','🎂','⚽','🏆','🎮','🍔','🌮','🍟','🍷','🥂','🚀','📸','💅','🧢','🕶️','🦄','🐸','💤','🤓','🥶','🤑','👻','🍆','🍑','💦','🌶️','🧠','🫠','🤌'];
 const COLORS = ['#ffffff','#111111','#c6ff3d','#ff3da5','#3dd9ff','#ffd23d','#ff5a36','#8b5cff'];
@@ -265,7 +265,7 @@ const S = {
   db:null, user:null, uid:null, owner:false, readOnly:false, offline:false,
   loaded:{members:false,posts:false}, slow:false,
   members:{}, posts:{}, castigos:{}, config:null, profiles:{}, eventos:{},
-  cntSel:'cubatas', cntRange:'mes', cntFor:null,
+  cntSel:'fiestas', cntRange:'mes', cntFor:null,
   imgCache:new Map(), tab:'hoy', joinShown:false, lastDay:today()
 };
 function memberIds(){ return Object.keys(S.members).sort((a,b)=>(S.members[a].joinedAt||0)-(S.members[b].joinedAt||0)); }
