@@ -428,6 +428,54 @@ body{font-size:15.5px;letter-spacing:.1px}
 .count{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-weight:900;font-size:150px;color:#fff;text-shadow:0 6px 30px rgba(0,0,0,.6);pointer-events:none}
 .count.go{animation:cnt 1s ease-out both}
 @keyframes cnt{0%{transform:scale(1.6);opacity:0}25%{transform:scale(1);opacity:1}100%{transform:scale(.8);opacity:0}}
+
+/* ================= v6 ================= */
+.tabs button{font-size:9.5px;padding:8px 0}
+.tabs button .i{font-size:20px}
+.duel{border-radius:22px;padding:14px;margin-bottom:12px;border:1px solid transparent;background:radial-gradient(90% 60% at 50% 0%,rgba(255,61,165,.14),transparent 70%) padding-box,linear-gradient(160deg,#1d1d25,#16161c) padding-box,linear-gradient(150deg,rgba(255,61,165,.45),rgba(255,255,255,.04) 50%,rgba(61,217,255,.35)) border-box;box-shadow:0 14px 34px -18px rgba(0,0,0,.75)}
+.dtop{display:flex;align-items:center;gap:8px}.dtop .ct{flex:1;text-align:right}
+.dvs{display:flex;align-items:center;justify-content:center;gap:10px;margin:14px 0 8px}
+.dside{flex:1;text-align:center;position:relative;min-width:0;transition:opacity .3s,filter .3s}
+.dside img{width:64px;height:64px;border-radius:50%;object-fit:cover;padding:3px;background:conic-gradient(var(--pink),var(--cyan),var(--pink));cursor:pointer}
+.dside b{display:block;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dside.win img{background:conic-gradient(var(--yellow),#fff3b0,var(--yellow));box-shadow:0 0 26px -2px rgba(255,210,61,.7)}
+.dside.lose{opacity:.55;filter:grayscale(.7)}
+.dcrown{position:absolute;top:-18px;left:50%;transform:translateX(-50%) rotate(-10deg);font-size:24px;animation:bob 1.8s ease-in-out infinite}
+.vs{font-family:var(--fd);font-weight:900;font-size:22px;color:var(--pink);text-shadow:0 0 18px rgba(255,61,165,.6);animation:beat 1.4s ease-in-out infinite}
+.dreto{text-align:center;font-weight:700;font-size:16px;margin:4px 0}
+.dap{text-align:center;color:var(--mut);font-size:13px}
+.dap b{color:var(--yellow)}
+.dbody{margin-top:10px}
+.dbody .ct{text-align:center;margin-top:6px}
+.vbar{display:flex;height:10px;border-radius:10px;overflow:hidden;background:rgba(255,255,255,.06)}
+.vbar i{display:block;height:100%;transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.vbar .va{background:linear-gradient(90deg,var(--pink),#ff6a3d)}.vbar .vb{background:linear-gradient(90deg,var(--cyan),var(--lime));margin-left:auto}
+.vnums{display:flex;justify-content:space-between;font-size:12px;color:var(--mut);margin-top:4px}
+.dvote{justify-content:center}.dvote .btn{flex:1}
+.dbody .acts{justify-content:center}
+.dpay{text-align:center;margin-top:10px;padding:10px;border-radius:14px;background:rgba(255,210,61,.08);border:1px dashed rgba(255,210,61,.4)}
+.cazprev{height:180px;border-radius:16px;border:2px dashed var(--edge);display:flex;align-items:center;justify-content:center;color:var(--mut);margin-bottom:10px;overflow:hidden;cursor:pointer}
+.cazprev img{width:100%;height:100%;object-fit:cover}
+.fiesta{position:fixed;inset:0;z-index:95;display:flex;flex-direction:column;background:radial-gradient(120% 80% at 50% 0%,#2b1030,#0d0d12 70%);padding:calc(10px + env(safe-area-inset-top)) 14px calc(14px + env(safe-area-inset-bottom));animation:slideUp .35s cubic-bezier(.2,.8,.2,1) both}
+.ftop{display:flex;align-items:center;gap:8px}
+.fwho{display:none;margin-top:10px}.fwho.open{display:block}
+.fchips{display:flex;flex-wrap:wrap;gap:6px}
+.fchips button{display:flex;align-items:center;gap:6px;padding:4px 10px 4px 4px;border-radius:20px;background:rgba(255,255,255,.06);border:1px solid var(--edge);font-size:13px;opacity:.45}
+.fchips button.on{opacity:1;border-color:var(--lime)}
+.fchips img{width:24px;height:24px;border-radius:50%;object-fit:cover}
+.fstage{flex:1;display:flex;align-items:center;justify-content:center;padding:16px 0;perspective:900px}
+.fcard{width:100%;max-width:440px;min-height:300px;border-radius:30px;padding:28px 22px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff;box-shadow:0 30px 70px -20px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.3);cursor:pointer;user-select:none}
+.fcard.in{animation:fflip .5s cubic-bezier(.2,.9,.3,1.25) both}
+.fcard.win{animation:win .7s cubic-bezier(.2,.9,.3,1.4)}
+@keyframes fflip{0%{opacity:0;transform:rotateY(-70deg) scale(.85)}100%{opacity:1;transform:none}}
+.fk{font-family:var(--fd);font-weight:700;font-size:12px;letter-spacing:.5px;text-transform:uppercase;opacity:.85;background:rgba(0,0,0,.2);padding:5px 12px;border-radius:20px}
+.ft{font-family:var(--fd);font-weight:800;font-size:23px;line-height:1.3;margin:22px 0;text-shadow:0 2px 14px rgba(0,0,0,.25)}
+.fn{font-size:14px;font-weight:600;opacity:.9}
+.fav{width:96px;height:96px;border-radius:50%;object-fit:cover;margin-top:18px;border:4px solid #fff}
+.ffilt{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:10px}
+.ffilt button{flex:none;padding:7px 12px;border-radius:20px;background:rgba(255,255,255,.06);border:1px solid var(--edge);font-size:12.5px;font-weight:600;opacity:.5}
+.ffilt button.on{opacity:1;border-color:var(--pink);background:rgba(255,61,165,.15)}
+.fbot{display:flex;gap:8px}
 </style>
 </head>
 <body>
@@ -555,7 +603,7 @@ const FRAMES = [['none','Sin marco'],['polaroid','Polaroid'],['banner','Banda TA
 const S = {
   db:null, user:null, uid:null, owner:false, readOnly:false, offline:false,
   loaded:{members:false,posts:false}, slow:false,
-  members:{}, posts:{}, castigos:{}, config:null, profiles:{}, eventos:{}, coms:{},
+  members:{}, posts:{}, castigos:{}, config:null, profiles:{}, eventos:{}, coms:{}, duelos:{}, cazados:{}, fiesta:{}, liaSec:'duelos',
   cntSel:'cubatas', cntRange:'mes', cntFor:null,
   imgCache:new Map(), tab:'hoy', joinShown:false, lastDay:today()
 };
@@ -606,11 +654,11 @@ function bestStreak(uid){
 
 /* ---------------- image loading ---------------- */
 let io=null;
-function imgFor(id, post, cls='ph'){
-  const key = id+'@'+(post.ts||0);
+function imgFor(id, post, cls='ph', col){
+  col=col||'imgs'; const key = (col==='imgs'?'':col+':')+id+'@'+(post.ts||0);
   const im = h('img',{class:cls,alt:''});
   if (S.imgCache.has(key)){ im.src=S.imgCache.get(key); return im; }
-  im.classList.add('ld'); im.dataset.key=key; im.dataset.id=id;
+  im.classList.add('ld'); im.dataset.key=key; im.dataset.id=id; im.dataset.col=col;
   if (!io) io = new IntersectionObserver(ents=>{ for (const e of ents) if (e.isIntersecting){ io.unobserve(e.target); fetchImg(e.target); } },{rootMargin:'300px'});
   io.observe(im);
   return im;
@@ -621,7 +669,7 @@ async function fetchImg(im){
   if (S.imgCache.has(key)){ im.src=S.imgCache.get(key); im.classList.remove('ld'); return; }
   if (!S.db) return;
   let p = inflight.get(key);
-  if (!p){ p = S.db.doc('imgs/'+id).get().then(s=> s.exists ? (s.data().data||'') : '').catch(()=> ''); inflight.set(key,p); }
+  if (!p){ p = S.db.doc((im.dataset.col||'imgs')+'/'+id).get().then(s=> s.exists ? (s.data().data||'') : '').catch(()=> ''); inflight.set(key,p); }
   const data = await p; inflight.delete(key);
   if (data){ S.imgCache.set(key,data); im.src=data; im.classList.add('fresh'); }
   im.classList.remove('ld');
@@ -649,9 +697,10 @@ function renderTabs(){
   const t=$('tabs'); t.textContent='';
   const pend = S.loaded.posts ? missedList().filter(m=>{ const c=S.castigos[pid(m.date,m.uid)]; return !c || c.estado==='pendiente'; }).length : 0;
   const popNow = S.tabsLast!==S.tab && S.tabsLast!==undefined; S.tabsLast=S.tab;
-  for (const [k,i,l] of [['hoy','📸','Hoy'],['cnt','🥃','Contadores'],['cast','⛓️','Castigos'],['rank','🏆','Ranking'],['hist','🗓️','Historial']])
+  const pendD = S.uid ? Object.values(S.duelos).filter(d=>d && d.b===S.uid && d.estado==='pendiente').length : 0;
+  for (const [k,i,l] of [['hoy','📸','Hoy'],['cnt','🥃','Contar'],['lia','🔥','Liarla'],['cast','⛓️','Castigos'],['rank','🏆','Ranking'],['hist','🗓️','Historial']])
     t.append(h('button',{class:(S.tab===k?'on':'')+(S.tab===k&&popNow&&!RM?' pop':''),onclick:()=>{ if (S.tab===k) return window.scrollTo({top:0,behavior:'smooth'}); S.tab=k; renderAll(); window.scrollTo({top:0});}},
-      h('span',{class:'i',text:i}), l, (k==='cast'&&pend)? h('span',{class:'badge',text:pend}) : null));
+      h('span',{class:'i',text:i}), l, (k==='cast'&&pend)? h('span',{class:'badge',text:pend}) : (k==='lia'&&pendD)? h('span',{class:'badge',text:pendD}) : null));
 }
 function renderMain(){
   const m=$('main'); const a=document.activeElement;
@@ -665,6 +714,7 @@ function renderMain(){
   else if (S.tab==='hist') renderHist(m);
   else if (S.tab==='cast') renderCast(m);
   else if (S.tab==='cnt') renderCnt(m);
+  else if (S.tab==='lia') renderLia(m);
   else renderRank(m);
   if (S.anim){
     [...m.children].forEach((c,i)=>{ c.style.animationDelay=Math.min(i,10)*45+'ms'; c.classList.add('in'); c.addEventListener('animationend',e=>{ if(e.animationName==='rise'&&e.target===c){ c.classList.remove('in'); c.style.animationDelay=''; } }); });
@@ -964,7 +1014,11 @@ function insignias(uid){
     {e:'🦉',n:'Al límite',d:'3 fotos después de las 23:00',ok:ps.filter(p=>hr(p)>=23).length>=3},
     {e:'🥃',n:'Barra libre',d:'10 cubatas apuntados',ok:evs.filter(e=>e.tipo==='cubatas').length>=10},
     {e:'💋',n:'Casanova',d:'5 besos apuntados',ok:evs.filter(e=>e.tipo==='besos').length>=5},
-    {e:'🤡',n:'Vago',d:'3 días sin subir foto',ok:fallos>=3}
+    {e:'🤡',n:'Vago',d:'3 días sin subir foto',ok:fallos>=3},
+    {e:'⚔️',n:'Gladiador',d:'Ganar 3 duelos',ok:duelStats(uid).g>=3},
+    {e:'🐔',n:'Gallina',d:'Rajarse de un duelo',ok:duelStats(uid).r>=1},
+    {e:'🕵️',n:'Paparazzi',d:'Cazar a 5 amigos',ok:Object.values(S.cazados).filter(c=>c&&c.uid===uid).length>=5},
+    {e:'🙈',n:'Cazado',d:'Que te cacen 3 veces',ok:Object.values(S.cazados).filter(c=>c&&c.quien===uid).length>=3}
   ];
 }
 function openProfile(uid){
@@ -979,6 +1033,7 @@ function openProfile(uid){
     h('h3',{text:nameOf(uid)}),
     h('p',{text:'Talibán desde el '+fmtShort(m.joined||today())+((S.config&&S.config.admin===uid)?' · 👑 admin':'')}),
     h('div',{class:'stats'}, stat(streak(uid),'🔥 racha'), stat(bestStreak(uid),'🏅 récord'), stat(posts.length,'📸 fotos'), stat(fallos,'💀 fallos')),
+    h('div',{class:'stats'}, stat(duelStats(uid).g,'⚔️ ganados'), stat(duelStats(uid).p,'💀 perdidos'), stat(Object.values(S.cazados).filter(c=>c&&c.uid===uid).length,'🕵️ cazó'), stat(Object.values(S.cazados).filter(c=>c&&c.quien===uid).length,'🙈 cazado')),
     h('div',{class:'stats'}, contadores().slice(0,4).map(c=>stat(evs.filter(e=>e.tipo===c.k).length, c.e+' '+c.n))),
     h('div',{class:'lbl',style:'margin-top:16px',text:'Insignias (toca una para ver cómo se consigue)'}),
     h('div',{class:'badges'}, insignias(uid).map(b=>h('button',{class:'bdg'+(b.ok?' ok':''),onclick:()=>toast(b.e+' '+b.n+': '+b.d+(b.ok?' ✅':' 🔒'))}, h('span',{text:b.e}), h('small',{text:b.n})))),
@@ -1038,6 +1093,179 @@ async function openCamera(facing){
   shut.onclick=()=>{ if (!me.timer) return snap(); let n=3; shut.disabled=true;
     const tick=()=>{ if (CAM!==me) return; if (n===0){ count.textContent=''; shut.disabled=false; return snap(); } count.textContent=n; count.classList.remove('go'); void count.offsetWidth; count.classList.add('go'); buzz(10); n--; me.tm=setTimeout(tick,1000); };
     tick(); };
+}
+
+/* ---------------- v6: duelos, cazados, modo fiesta ---------------- */
+function duelStats(uid){ let g=0,p=0,r=0; for (const d of Object.values(S.duelos)){ if(!d) continue; if (d.estado==='rechazado' && d.b===uid) r++; if (d.estado==='terminado' && d.ganador && d.ganador!=='empate'){ const w=d[d.ganador], l=d[d.ganador==='a'?'b':'a']; if (w===uid) g++; if (l===uid) p++; } } return {g,p,r}; }
+function memberSelect(exclude, placeholder){ return h('select',{class:'inp'}, h('option',{value:''},placeholder||'— Elige a alguien —'), memberIds().filter(u=>u!==exclude).map(u=>h('option',{value:u},nameOf(u)))); }
+function chipsFill(inp, list){ return h('div',{class:'quick'}, list.map(q=>h('button',{type:'button',onclick:()=>{ inp.value=q; inp.focus(); }},q))); }
+function fileToData(f, max, limit){
+  return new Promise((res,rej)=>{ const url=URL.createObjectURL(f); const im=new Image();
+    im.onload=()=>{ let sc=Math.min(1,(max||1080)/Math.max(im.naturalWidth,im.naturalHeight)), q=.85, out='';
+      for (let i=0;i<12;i++){ const c=document.createElement('canvas'); c.width=Math.round(im.naturalWidth*sc); c.height=Math.round(im.naturalHeight*sc); c.getContext('2d').drawImage(im,0,0,c.width,c.height); out=c.toDataURL('image/jpeg',q); if (out.length<(limit||235000)) break; if (q>.55) q-=.1; else sc*=.85; }
+      URL.revokeObjectURL(url); res(out); };
+    im.onerror=()=>{ URL.revokeObjectURL(url); rej(new Error('img')); }; im.src=url; });
+}
+function renderLia(m){
+  m.append(h('div',{class:'seg',style:'margin:6px 0 14px'}, [['duelos','⚔️ Duelos'],['cazados','📸 Cazados'],['fiesta','🍻 Fiesta']].map(([k,l])=>h('button',{class:S.liaSec===k?'on':'',onclick:()=>{ S.liaSec=k; S.animKey=''; renderMain(); }},l))));
+  if (S.liaSec==='duelos') renderDuelos(m); else if (S.liaSec==='cazados') renderCazados(m); else renderFiestaTab(m);
+}
+/* ---- duelos ---- */
+const RETOS_DUELO=['Quién liga antes esta noche','Quién aguanta más sin mirar el móvil','Quién llega antes a la quedada','Partido de FIFA / penaltis','Quién bebe menos esta noche','Quién consigue más reacciones mañana','Pulso','Quién aguanta más sin decir una palabrota'];
+const APUESTAS_DUELO=['Paga un cubata','Paga la cena','Ruleta de castigo','Story que elija el ganador','Foto de perfil que elija el ganador 24 h','Hace de chófer'];
+function newDuelo(){
+  const sel=memberSelect(S.uid,'— ¿A quién retas? —'); const reto=h('input',{class:'inp',placeholder:'El reto…',maxlength:'90',style:'margin-top:8px'}); const ap=h('input',{class:'inp',placeholder:'Lo que se juega el que pierda…',maxlength:'80',style:'margin-top:8px'});
+  const go=async()=>{ if(!sel.value) return toast('Elige a quién retas'); if(!reto.value.trim()) return toast('Escribe el reto'); if(!ap.value.trim()) return toast('¿Qué se apuesta?');
+    if (await W(()=>S.db.collection('duelos').add({a:S.uid,b:sel.value,reto:reto.value.trim(),apuesta:ap.value.trim(),estado:'pendiente',votos:{},ts:Date.now()}))){ ov.remove(); buzz([20,40,20]); toast('⚔️ Reto lanzado a '+nameOf(sel.value)); } };
+  const ov=h('div',{class:'ov'}, h('div',{class:'modal'}, h('h3',{text:'⚔️ Nuevo duelo'}), h('p',{text:'Retas a alguien, si acepta el grupo vota quién gana y el que pierde paga.'}),
+    sel, reto, chipsFill(reto,RETOS_DUELO), ap, chipsFill(ap,APUESTAS_DUELO),
+    h('div',{class:'btns'}, h('button',{class:'btn ghost',text:'Cancelar',onclick:()=>ov.remove()}), h('button',{class:'btn pink',text:'¡Retar!',onclick:go}))));
+  document.body.append(ov);
+}
+function cerrarDuelo(id,d){
+  const v=Object.values(d.votos||{}); const va=v.filter(x=>x==='a').length, vb=v.filter(x=>x==='b').length;
+  const g = va>vb?'a':vb>va?'b':'empate';
+  ask('¿Cerrar el duelo?', g==='empate'?`Van ${va} a ${vb}: quedará en empate.`:`Gana ${nameOf(d[g])} (${Math.max(va,vb)} a ${Math.min(va,vb)}).`, 'Cerrar').then(ok=>{ if(!ok) return;
+    W(()=>S.db.doc('duelos/'+id).update({estado:'terminado',ganador:g,cerrado:Date.now()})).then(r=>{ if(r){ confetti(60); buzz([40,60,120]); } }); });
+}
+function ruletaDuelo(id,d){
+  const loser=d[d.ganador==='a'?'b':'a']; const list=castigoList(); const slot=h('div',{class:'slot spin',text:'…'}); const btns=h('div',{class:'btns'});
+  const ov=h('div',{class:'ov'}, h('div',{class:'modal'}, h('h3',{text:'🎰 Castigo del duelo'}), h('p',{text:nameOf(loser)+' ha perdido el duelo.'}), slot, btns)); document.body.append(ov);
+  const final=list[Math.floor(Math.random()*list.length)]; let i=0, delay=50; const start=Date.now();
+  const step=()=>{ if (Date.now()-start>2600){ slot.textContent=final; slot.classList.remove('spin'); slot.classList.add('win'); confetti(45); buzz([40,60,120]); btns.append(h('button',{class:'btn ghost',text:'Cerrar',onclick:()=>ov.remove()})); W(()=>S.db.doc('duelos/'+id).update({castigo:final})); return; }
+    slot.textContent=list[i++%list.length]; delay*=1.08; setTimeout(step,delay); }; step();
+}
+function dueloCard(id,d){
+  const me=S.uid, va=Object.values(d.votos||{}).filter(x=>x==='a').length, vb=Object.values(d.votos||{}).filter(x=>x==='b').length, tot=Math.max(1,va+vb);
+  const mine=(d.votos||{})[me]; const part=me===d.a||me===d.b; const act=canAct()&&iAmMember();
+  const side=(k)=>h('div',{class:'dside'+(d.estado==='terminado'&&d.ganador===k?' win':'')+(d.estado==='terminado'&&d.ganador&&d.ganador!=='empate'&&d.ganador!==k?' lose':'')},
+    h('img',{src:avatarOf(d[k]),alt:'',onclick:()=>openProfile(d[k])}), h('b',{text:nameOf(d[k])}),
+    d.estado==='terminado'&&d.ganador===k? h('div',{class:'dcrown',text:'👑'}) : null);
+  const estadoTag = {pendiente:['⏳ Esperando respuesta','p'],aceptado:['🗳️ Votación abierta','f'],rechazado:['🐔 Se rajó','p'],terminado:[d.ganador==='empate'?'🤝 Empate':'🏁 Terminado','c']}[d.estado]||['','f'];
+  const body=h('div',{class:'dbody'});
+  if (d.estado==='pendiente'){
+    if (me===d.b && act) body.append(h('div',{class:'acts'}, h('button',{class:'btn sm',onclick:()=>W(()=>S.db.doc('duelos/'+id).update({estado:'aceptado',acepto:Date.now()})).then(r=>{ if(r){ buzz(20); toast('⚔️ ¡Duelo aceptado!'); } })},'⚔️ Acepto'), h('button',{class:'btn sm ghost',onclick:()=>ask('¿Rajarte?','Quedará marcado como gallina 🐔 en tu perfil.','Me rajo',true).then(ok=>{ if(ok) W(()=>S.db.doc('duelos/'+id).update({estado:'rechazado'})); })},'🐔 Me rajo')));
+    else body.append(h('div',{class:'ct',text:'Esperando a que '+nameOf(d.b)+' acepte…'}));
+  } else if (d.estado==='aceptado' || d.estado==='terminado'){
+    body.append(h('div',{class:'vbar'}, h('i',{class:'va',style:`width:${va/tot*100}%`}), h('i',{class:'vb',style:`width:${vb/tot*100}%`})),
+      h('div',{class:'vnums'}, h('span',{text:va+' voto'+(va===1?'':'s')}), h('span',{text:vb+' voto'+(vb===1?'':'s')})));
+    if (d.estado==='aceptado'){
+      if (act && !part) body.append(h('div',{class:'acts dvote'}, ['a','b'].map(k=>h('button',{class:'btn sm'+(mine===k?'':' ghost'),onclick:()=>{ buzz(10); W(()=>S.db.doc('duelos/'+id).update({['votos.'+me]:mine===k?'':k})); }},'Gana '+nameOf(d[k])))));
+      else if (part) body.append(h('div',{class:'ct',text:'Los demás votan quién gana. Tú no puedes votar 😏'}));
+      if (act && (part || S.owner || d.a===me)) body.append(h('div',{class:'acts'}, h('button',{class:'btn sm ghost',onclick:()=>cerrarDuelo(id,d)},'🏁 Cerrar y ver ganador')));
+    } else if (d.ganador && d.ganador!=='empate'){
+      const loser=d[d.ganador==='a'?'b':'a'];
+      body.append(h('div',{class:'dpay'}, h('b',{text:'💸 '+nameOf(loser)+' debe: '}), d.apuesta, d.castigo? h('div',{class:'cast',text:'⛓️ '+d.castigo}) : null),
+        h('div',{class:'acts'},
+          (act && !d.castigo && /ruleta|castigo/i.test(d.apuesta))? h('button',{class:'btn sm',onclick:()=>ruletaDuelo(id,d)},'🎰 Girar ruleta') : null,
+          d.pagado? h('span',{class:'tag c',text:'PAGADO'}) : (act? h('button',{class:'btn sm ghost',onclick:()=>W(()=>S.db.doc('duelos/'+id).update({pagado:true}))},'✅ Pagado') : h('span',{class:'tag p',text:'SIN PAGAR'}))));
+    }
+  }
+  const canDel = canAct() && (S.owner || (d.a===me && d.estado==='pendiente'));
+  return h('div',{class:'duel'},
+    h('div',{class:'dtop'}, h('span',{class:'tag '+estadoTag[1],text:estadoTag[0]}), h('span',{class:'ct',text:ago(d.ts)}), canDel? h('button',{class:'x',text:'✕',title:'Borrar',onclick:()=>ask('¿Borrar duelo?','Se borrará para todos.','Borrar',true).then(ok=>{ if(ok) W(()=>S.db.doc('duelos/'+id).delete()); })}) : null),
+    h('div',{class:'dvs'}, side('a'), h('div',{class:'vs',text:'VS'}), side('b')),
+    h('div',{class:'dreto',text:d.reto}), h('div',{class:'dap'}, '🎲 Se juegan: ', h('b',{text:d.apuesta})), body);
+}
+function renderDuelos(m){
+  if (canAct() && iAmMember()) m.append(h('button',{class:'btn big pink',onclick:newDuelo},'⚔️ Retar a alguien'));
+  const all=Object.entries(S.duelos).filter(([,d])=>d&&d.a&&d.b);
+  const ord={pendiente:0,aceptado:1,terminado:2,rechazado:3};
+  all.sort((x,y)=> (ord[x[1].estado]-ord[y[1].estado]) || (y[1].ts||0)-(x[1].ts||0));
+  const act=all.filter(([,d])=>d.estado==='pendiente'||d.estado==='aceptado'), old=all.filter(([,d])=>d.estado==='terminado'||d.estado==='rechazado');
+  m.append(h('div',{class:'sec'},'En juego', h('small',{text:act.length?String(act.length):''})));
+  if (!act.length) m.append(h('div',{class:'empty'},'No hay duelos abiertos. ¿Quién se atreve? ⚔️'));
+  act.forEach(([id,d])=>m.append(dueloCard(id,d)));
+  if (old.length){ m.append(h('div',{class:'sec'},'Historial de duelos')); old.slice(0,30).forEach(([id,d])=>m.append(dueloCard(id,d))); }
+  const ids=memberIds(); const tabla=ids.map(u=>({u,...duelStats(u)})).filter(x=>x.g||x.p||x.r).sort((a,b)=>b.g-a.g||a.p-b.p);
+  if (tabla.length){ m.append(h('div',{class:'sec'},'Gladiadores'));
+    tabla.forEach((x,i)=>m.append(h('div',{class:'row',onclick:()=>openProfile(x.u),style:'cursor:pointer'}, h('span',{style:'width:22px;text-align:center;font-weight:800',text:i===0?'👑':String(i+1)}), h('img',{class:'av',src:avatarOf(x.u),alt:''}), h('div',{class:'mid'}, h('b',{text:nameOf(x.u)}), h('small',{text:`${x.g} ganados · ${x.p} perdidos`+(x.r?` · 🐔 ${x.r}`:'')}))))); }
+}
+/* ---- cazados ---- */
+function newCazado(){
+  let data=null; const prev=h('div',{class:'cazprev',text:'📷 Toca para elegir la foto'});
+  const sel=memberSelect(null,'— ¿A quién has cazado? —'); const txt=h('input',{class:'inp',placeholder:'¿Qué estaba haciendo? 😂',maxlength:'120',style:'margin-top:8px'});
+  prev.onclick=()=>{ const fi=h('input',{type:'file',accept:'image/*',style:'display:none'}); fi.addEventListener('change',async()=>{ const f=fi.files&&fi.files[0]; fi.remove(); if(!f) return; prev.textContent='Cargando…';
+    try{ data=await fileToData(f); prev.textContent=''; prev.append(h('img',{src:data,alt:''})); }catch(_){ prev.textContent='No se pudo abrir esa foto'; } }); document.body.append(fi); fi.click(); };
+  const go=async()=>{ if(!sel.value) return toast('¿A quién has cazado?'); if(!data) return toast('Falta la foto');
+    const ref=S.db.collection('cazados').doc(); const ts=Date.now(); S.imgCache.set('cimgs:'+ref.id+'@'+ts,data);
+    if (await W(()=>S.db.doc('cimgs/'+ref.id).set({data})) && await W(()=>ref.set({uid:S.uid,quien:sel.value,txt:txt.value.trim(),ts,votos:{}}))){ ov.remove(); confetti(40); toast('🕵️ ¡'+nameOf(sel.value)+' cazado!'); } };
+  const ov=h('div',{class:'ov'}, h('div',{class:'modal'}, h('h3',{text:'📸 Cazar a alguien'}), h('p',{text:'Sube una foto de un Talibán pillado en plena acción. Aquí sí vale la galería.'}),
+    prev, sel, txt, h('div',{class:'btns'}, h('button',{class:'btn ghost',text:'Cancelar',onclick:()=>ov.remove()}), h('button',{class:'btn pink',text:'Publicar',onclick:go}))));
+  document.body.append(ov);
+}
+function renderCazados(m){
+  if (canAct() && iAmMember()) m.append(h('button',{class:'btn big pink',onclick:newCazado},'📸 Cazar a alguien'));
+  const all=Object.entries(S.cazados).filter(([,c])=>c&&c.quien).sort((a,b)=>(b[1].ts||0)-(a[1].ts||0));
+  const mes=today().slice(0,7); const nv=c=>Object.values(c.votos||{}).filter(Boolean).length;
+  const top=all.filter(([,c])=>ymd(new Date(c.ts||0)).slice(0,7)===mes && nv(c)>0).sort((a,b)=>nv(b[1])-nv(a[1]))[0];
+  if (top){ const [id,c]=top; m.append(h('div',{class:'row mvp',style:'margin-top:14px;cursor:pointer',onclick:()=>lightboxC(id,c)}, imgFor(id,c,'mvpimg','cimgs'), h('div',{class:'mid'}, h('small',{text:'🏆 CAZADO DEL MES'}), h('b',{text:nameOf(c.quien)}), h('small',{text:nv(c)+' 🤣'})), h('div',{style:'font-size:26px',text:'🙈'}))); }
+  m.append(h('div',{class:'sec'},'Pillados', h('small',{text:all.length?String(all.length):''})));
+  if (!all.length) m.append(h('div',{class:'empty'},'Nadie ha sido cazado todavía. Ojo, que cualquiera puede ser el primero 👀'));
+  for (const [id,c] of all){
+    const mine=(c.votos||{})[S.uid]; const canDel=canAct()&&(c.uid===S.uid||c.quien===S.uid||S.owner);
+    const im=imgFor(id,c,'ph','cimgs'); im.onclick=()=>lightboxC(id,c);
+    m.append(h('div',{class:'post'},
+      h('div',{class:'hd'}, h('img',{src:avatarOf(c.quien),alt:'',onclick:()=>openProfile(c.quien),style:'cursor:pointer'}), h('div',null, h('div',{class:'nm',text:'🙈 '+nameOf(c.quien)}), h('div',{class:'tm',text:'Cazado por '+nameOf(c.uid)+' · '+ago(c.ts)})), h('div',{class:'sp'}),
+        canDel? h('button',{class:'x',text:'🗑',title:'Borrar',onclick:()=>ask('¿Borrar?','Se borrará esta foto.','Borrar',true).then(ok=>{ if(ok) W(()=>S.db.doc('cazados/'+id).delete()).then(r=>{ if(r) W(()=>S.db.doc('cimgs/'+id).delete()); }); })}) : null),
+      h('div',{class:'phw'}, im), c.txt? h('div',{class:'cap',text:c.txt}) : null,
+      h('div',{class:'reacts'}, h('button',{class:mine?'on':'',onclick:ev=>{ if(!canAct()) return; if(!mine){ buzz(8); const b=ev.currentTarget.getBoundingClientRect(); floatEmoji('🤣',b.left+b.width/2,b.top); } W(()=>S.db.doc('cazados/'+id).update({['votos.'+S.uid]:mine?0:1})); }}, '🤣', h('small',{text:nv(c)||''})))));
+  }
+}
+function lightboxC(id,c){
+  const im=imgFor(id,c,'','cimgs'); im.style.minHeight='0';
+  const ov=h('div',{class:'ov lb',onclick:e=>{ if(e.target===ov) ov.remove(); }}, h('button',{class:'close',text:'✕',onclick:()=>ov.remove()}), im,
+    h('div',{class:'info'}, h('div',{style:'font-weight:800',text:'🙈 '+nameOf(c.quien)+' · cazado por '+nameOf(c.uid)}), c.txt? h('div',{style:'margin-top:6px',text:c.txt}) : null,
+      h('div',{class:'acts',style:'margin-top:10px'}, h('button',{class:'btn ghost sm',onclick:()=>shareImg(im,{date:ymd(new Date(c.ts||0)),uid:c.quien})},'📤 Compartir / guardar'))));
+  document.body.append(ov); if (im.dataset.key && !im.src) fetchImg(im);
+}
+/* ---- modo fiesta ---- */
+const FIESTA={
+  reto:{e:'🔥',n:'Reto',c:['#ff3da5','#ff6a3d'],l:['{X}, imita a {Y} hasta que alguien lo adivine','{X}, enseña la última foto de tu galería','{X}, lee en voz alta el último mensaje que has mandado','{X}, llama a alguien de tu agenda y cántale cumpleaños feliz','{X}, deja que {Y} te escriba un estado de WhatsApp','{X}, 10 flexiones o bebes','{X}, cuenta tu peor cita','{X} y {Y}: piedra, papel o tijera. El que pierde bebe','{X}, habla con acento argentino hasta tu próximo turno','{X}, enseña tus 3 últimas búsquedas de Google','{X}, deja que {Y} te peine','{X}, baila 20 segundos sin música','{X}, di algo bonito de cada uno de los que estáis','{X}, intercambia una prenda con {Y} hasta el final de la noche','Todos los que lleven algo negro beben','{X}, cuenta algo que {Y} no sepa de ti','{X}, pon la última canción que has escuchado y defiéndela','{X}, elige a alguien: los dos bebéis','{X}, imita a un famoso. Si nadie lo adivina, bebes','{X}, deja que {Y} mande un mensaje desde tu móvil (sin pasarse)','{X}, haz tu mejor paso de baile y que todos lo copien','{X}, haz un brindis épico por los Talibanes']},
+  nunca:{e:'🙊',n:'Yo nunca',c:['#8b5cff','#3dd9ff'],l:['Yo nunca he mandado un mensaje a la persona equivocada','Yo nunca me he dormido en una fiesta','Yo nunca he mentido para no quedar con el grupo','Yo nunca he stalkeado a un ex esta semana','Yo nunca he vomitado en una noche de fiesta','Yo nunca me he liado con alguien de este grupo','Yo nunca he perdido el móvil de fiesta','Yo nunca he llorado con una peli','Yo nunca he fingido estar malo para no ir a algo','Yo nunca he llegado a casa después de las 8 de la mañana','Yo nunca he tenido una cita de una app','Yo nunca he dicho "no bebo más" y he seguido','Yo nunca he subido una foto antigua a los Talibanes','Yo nunca me he colado en un sitio sin pagar','Yo nunca he escrito a alguien pedo y me he arrepentido','Yo nunca me he liado con alguien cuyo nombre no recuerdo','Yo nunca he dicho "te quiero" estando pedo']},
+  verdad:{e:'🤫',n:'Verdad',c:['#3dd9ff','#c6ff3d'],l:['{X}, ¿quién de aquí es el peor cuando va pedo?','{X}, ¿tu momento más vergonzoso?','{X}, ¿a quién llamarías para esconder un cadáver?','{X}, ¿quién es tu crush ahora mismo?','{X}, ¿lo peor que has hecho borracho?','{X}, ¿qué piensas de verdad de {Y}?','{X}, ¿a quién stalkeaste por última vez?','{X}, ¿cuántos mensajes sin leer tienes ahora?','{X}, ¿a quién de aquí le cambiarías la vida un día?','{X}, ¿qué mentira has dicho esta semana?','{X}, ¿a quién de aquí no le dejarías tu casa?','{X}, ¿tu peor rechazo?']},
+  quien:{e:'👉',n:'¿Quién es más probable…?',c:['#ffd23d','#ff6a3d'],l:['¿Quién es más probable que acabe en la cárcel?','¿Quién es más probable que se case primero?','¿Quién es más probable que pierda el móvil esta noche?','¿Quién es más probable que se duerma antes de las 3?','¿Quién es más probable que acabe liándose hoy?','¿Quién es más probable que escriba a su ex esta noche?','¿Quién es más probable que se haga famoso?','¿Quién es más probable que falle mañana la foto?','¿Quién es más probable que llore esta noche?','¿Quién es más probable que acabe en un after?','¿Quién es más probable que vomite primero?','¿Quién es más probable que se pelee con un portero?']}
+};
+const FIESTA_NOTA={reto:'Si no lo hace, bebe 🍻',nunca:'Bebe quien lo haya hecho 🍻',verdad:'Si no contesta, bebe 🍻',quien:'A la de 3, todos señalan. El más señalado bebe 🍻'};
+function renderFiestaTab(m){
+  m.append(h('div',{class:'hero',style:'text-align:center'}, h('div',{style:'font-size:54px',class:'flame',text:'🍻'}), h('h2',{text:'Modo Fiesta'}), h('p',{text:'Retos, Yo nunca, Verdad y ¿Quién es más probable…? con los nombres de los que estáis. Pasa el móvil y que empiece la liada.'}),
+    h('button',{class:'btn big pink',onclick:openFiesta},'🔥 Empezar')));
+  const custom=Object.entries(S.fiesta).filter(([,c])=>c&&c.txt);
+  m.append(h('div',{class:'sec'},'Cartas del grupo', h('small',{text:custom.length?String(custom.length):''})));
+  if (canAct()&&iAmMember()) m.append(h('button',{class:'btn ghost',style:'width:100%;margin-bottom:10px',onclick:addFiestaCard},'➕ Añadir carta propia'));
+  if (!custom.length) m.append(h('div',{class:'empty'},'Añadid vuestras propias cartas con anécdotas del grupo 😈'));
+  custom.sort((a,b)=>(b[1].ts||0)-(a[1].ts||0)).forEach(([id,c])=>m.append(h('div',{class:'row'}, h('div',{style:'font-size:22px',text:(FIESTA[c.tipo]||FIESTA.reto).e}), h('div',{class:'mid'}, h('b',{text:c.txt}), h('small',{text:(FIESTA[c.tipo]||FIESTA.reto).n+' · por '+nameOf(c.uid)})),
+    (canAct()&&(c.uid===S.uid||S.owner))? h('button',{class:'x',text:'✕',onclick:()=>W(()=>S.db.doc('fiesta/'+id).delete())}) : null)));
+}
+function addFiestaCard(){
+  let tipo='reto'; const segs=h('div',{class:'seg',style:'margin:0 0 10px'}); const txt=h('textarea',{class:'inp',rows:'3',maxlength:'160',placeholder:'Ej: {X}, cuenta lo que pasó en Benidorm'});
+  const draw=()=>{ segs.textContent=''; for (const k of Object.keys(FIESTA)) segs.append(h('button',{class:tipo===k?'on':'',onclick:()=>{ tipo=k; draw(); }},FIESTA[k].e+' '+(k==='quien'?'Quién':FIESTA[k].n))); }; draw();
+  const ov=h('div',{class:'ov'}, h('div',{class:'modal'}, h('h3',{text:'➕ Nueva carta'}), h('p',{text:'Usa {X} para un nombre al azar de los que estén y {Y} para otro distinto.'}), segs, txt,
+    h('div',{class:'btns'}, h('button',{class:'btn ghost',text:'Cancelar',onclick:()=>ov.remove()}), h('button',{class:'btn',text:'Añadir',onclick:async()=>{ const v=txt.value.trim(); if(!v) return; if (await W(()=>S.db.collection('fiesta').add({tipo,txt:v,uid:S.uid,ts:Date.now()}))){ ov.remove(); toast('Carta añadida 😈'); } }}))));
+  document.body.append(ov);
+}
+function openFiesta(){
+  const ids=memberIds(); let present=new Set(ids); let tipos=new Set(Object.keys(FIESTA)); let hist=[];
+  const shuffle=a=>{ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
+  const pick=()=>{ const pool=[]; for (const k of tipos){ FIESTA[k].l.forEach(t=>pool.push({k,t})); } Object.values(S.fiesta).forEach(c=>{ if(c&&c.txt&&tipos.has(c.tipo)) pool.push({k:c.tipo,t:c.txt,own:1},{k:c.tipo,t:c.txt,own:1}); });
+    if (!pool.length) return null; let c; for (let i=0;i<20;i++){ c=pool[Math.floor(Math.random()*pool.length)]; if (!hist.includes(c.t)) break; } hist.push(c.t); if (hist.length>25) hist.shift();
+    const pp=shuffle([...present]); const X=pp[0]?nameOf(pp[0]):'Alguien', Y=pp[1]?nameOf(pp[1]):'alguien'; return {k:c.k, own:c.own, t:c.t.replace(/\{X\}/g,X).replace(/\{Y\}/g,Y)}; };
+  const card=h('div',{class:'fcard'}); const who=h('div',{class:'fwho'}); const filt=h('div',{class:'ffilt'});
+  let n=0;
+  const next=()=>{ const c=pick(); if(!c){ card.textContent='Activa algún tipo de carta 👇'; return; } const f=FIESTA[c.k]; n++; buzz(12);
+    card.className='fcard'; void card.offsetWidth; card.className='fcard in';
+    card.style.background=`linear-gradient(150deg,${f.c[0]},${f.c[1]})`; card.textContent='';
+    card.append(h('div',{class:'fk',text:f.e+' '+f.n+(c.own?' · del grupo':'')}), h('div',{class:'ft',text:c.t}), h('div',{class:'fn',text:FIESTA_NOTA[c.k]})); };
+  const drawWho=()=>{ who.textContent=''; who.append(h('div',{class:'lbl',style:'color:#fff;opacity:.8',text:'¿Quién está? (toca para quitar)'}), h('div',{class:'fchips'}, ids.map(u=>h('button',{class:present.has(u)?'on':'',onclick:()=>{ present.has(u)?present.delete(u):present.add(u); drawWho(); }}, h('img',{src:avatarOf(u),alt:''}), nameOf(u))))); };
+  const drawFilt=()=>{ filt.textContent=''; for (const k of Object.keys(FIESTA)) filt.append(h('button',{class:tipos.has(k)?'on':'',onclick:()=>{ tipos.has(k)&&tipos.size>1?tipos.delete(k):tipos.add(k); drawFilt(); }},FIESTA[k].e+' '+(k==='quien'?'Quién':FIESTA[k].n))); };
+  const victim=()=>{ const pp=[...present]; if(!pp.length) return; let i=0, d=60; const st=Date.now(); card.className='fcard'; card.style.background='linear-gradient(150deg,#111,#2a2a35)';
+    const step=()=>{ const u=pp[i++%pp.length]; card.textContent=''; card.append(h('div',{class:'fk',text:'🎯 La víctima es…'}), h('img',{class:'fav',src:avatarOf(u),alt:''}), h('div',{class:'ft',text:nameOf(u)}));
+      if (Date.now()-st>2200){ card.className='fcard win'; confetti(50); buzz([40,60,120]); card.append(h('div',{class:'fn',text:'Le toca beber o reto 😈'})); return; } d*=1.1; setTimeout(step,d); }; step(); };
+  const ov=h('div',{class:'fiesta'},
+    h('div',{class:'ftop'}, h('button',{class:'btn ghost sm',onclick:()=>ov.remove()},'✕'), h('div',{class:'camt',text:'🍻 Modo Fiesta'}), h('button',{class:'btn ghost sm',onclick:()=>who.classList.toggle('open')},'👥')),
+    who, h('div',{class:'fstage',onclick:next}, card), filt,
+    h('div',{class:'fbot'}, h('button',{class:'btn ghost',onclick:victim},'🎯 Víctima'), h('button',{class:'btn big',style:'flex:1',onclick:next},'Siguiente 👉')));
+  document.body.append(ov); drawWho(); drawFilt(); next(); S.fiestaDraw=null;
 }
 
 /* ---------------- modals ---------------- */
@@ -1465,6 +1693,8 @@ renderAll();
     if (!snap.metadata.fromCache){ S.loaded.posts=true; clearTimeout(timer); S.slow=false; }
     renderAll();
   }, onErr);
+  const liaSub=(col,key)=>db.collection(col).onSnapshot(snap=>{ const o={}; snap.docs.forEach(d=>{ o[d.id]=d.data(); }); S[key]=o; if (S.fiestaDraw && key==='fiesta') S.fiestaDraw(); renderTabs(); if (S.tab==='lia') renderMain(); }, onErr);
+  liaSub('duelos','duelos'); liaSub('cazados','cazados'); liaSub('fiesta','fiesta');
   db.collection('comentarios').onSnapshot(snap=>{ const c={}; snap.docs.forEach(d=>{ c[d.id]=d.data(); }); S.coms=c; if (S.comDraw) S.comDraw(); if (S.tab==='hoy') renderMain(); }, onErr);
   db.collection('eventos').onSnapshot(snap=>{ const ev={}; snap.docs.forEach(d=>{ ev[d.id]=d.data(); }); S.eventos=ev; if (S.tab==='cnt'||S.tab==='rank') renderAll(); }, onErr);
   db.collection('castigos').onSnapshot(snap=>{ const c={}; snap.docs.forEach(d=>{ c[d.id]=d.data(); }); S.castigos=c; renderAll(); }, onErr);
