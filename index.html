@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Talibanes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bangers&family=Inter:wght@400;600;800&family=Pacifico&family=Permanent+Marker&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#0f0f12">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Talibanes">
+<link rel="icon" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="manifest" href="manifest.json">
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="config.js"></script>
+<style>
+:root{
+  --bg:#0f0f12; --card:#1a1a20; --card2:#23232b; --line:#2e2e38;
+  --txt:#f4f4f6; --mut:#9a9aa8; --lime:#c6ff3d; --pink:#ff3da5; --cyan:#3dd9ff; --red:#ff4d4d; --yellow:#ffd23d;
+  --r:18px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--txt);font-family:Inter,system-ui,sans-serif;font-size:15px}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+input,textarea{font:inherit;color:var(--txt)}
+.app{max-width:640px;margin:0 auto;padding:0 14px 110px}
+header.top{position:sticky;top:0;z-index:20;background:linear-gradient(var(--bg) 70%,transparent);padding:14px 0 10px;display:flex;align-items:center;gap:10px}
+.logo{font-family:Bangers,cursive;font-size:38px;letter-spacing:2px;line-height:1;color:var(--lime);text-shadow:3px 3px 0 var(--pink);transform:rotate(-2deg)}
+.top .sp{flex:1}
+.clock{font-size:12px;color:var(--mut);text-align:right;line-height:1.3}
+.clock b{color:var(--yellow);font-size:14px}
+.meav{width:38px;height:38px;border-radius:50%;object-fit:cover;border:2px solid var(--lime)}
+.tabs{position:fixed;bottom:0;left:0;right:0;z-index:30;background:rgba(15,15,18,.94);backdrop-filter:blur(10px);border-top:1px solid var(--line);display:flex;justify-content:center;padding:6px 6px calc(6px + env(safe-area-inset-bottom))}
+.tabs .in{display:flex;width:100%;max-width:640px}
+.tabs button{flex:1;padding:8px 4px;border-radius:12px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;color:var(--mut);font-weight:600}
+.tabs button .i{font-size:22px;filter:grayscale(1);opacity:.6}
+.tabs button.on{color:var(--lime)}
+.tabs button.on .i{filter:none;opacity:1}
+.banner{background:#2a1f05;border:1px solid #5a4510;color:#ffe08a;border-radius:12px;padding:10px 12px;margin:6px 0 12px;font-size:13px}
+.banner.red{background:#2a0b0b;border-color:#5a1a1a;color:#ffb3b3}
+.hero{background:var(--card);border-radius:var(--r);padding:18px;margin:6px 0 14px;position:relative;overflow:hidden;border:1px solid var(--line)}
+.hero.warn{background:linear-gradient(135deg,#2b0f1f,#1a1a20 60%);border-color:#5b1f3d}
+.hero.ok{background:linear-gradient(135deg,#1d2a07,#1a1a20 60%);border-color:#3c5410}
+.hero h2{font-family:Bangers,cursive;font-size:30px;letter-spacing:1px;margin:0 0 4px;font-weight:400}
+.hero p{margin:0 0 14px;color:var(--mut)}
+.hero .myimg{width:84px;height:84px;border-radius:14px;object-fit:cover;float:right;margin-left:12px;border:2px solid var(--lime);background:var(--card2)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;border-radius:14px;font-weight:800;background:var(--lime);color:#111;font-size:16px}
+.btn.big{width:100%;padding:16px;font-size:18px}
+.btn.pink{background:var(--pink);color:#fff}
+.btn.ghost{background:var(--card2);color:var(--txt)}
+.btn.sm{padding:8px 12px;font-size:13px;border-radius:10px}
+.btn:disabled{opacity:.5;cursor:default}
+.prog{display:flex;align-items:center;gap:10px;margin:0 0 10px;font-size:13px;color:var(--mut)}
+.bar{flex:1;height:8px;border-radius:8px;background:var(--card2);overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--lime),var(--cyan))}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 0 12px;scrollbar-width:none}
+.chip{flex:none;display:flex;flex-direction:column;align-items:center;gap:4px;width:66px;font-size:11px;text-align:center}
+.chip .av{width:52px;height:52px;border-radius:50%;object-fit:cover;border:3px solid var(--line)}
+.chip.done .av{border-color:var(--lime)}
+.chip.miss .av{border-color:var(--pink);filter:grayscale(.7)}
+.chip span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:100%}
+.post{background:var(--card);border-radius:var(--r);margin:0 0 16px;overflow:hidden;border:1px solid var(--line)}
+.post .hd{display:flex;align-items:center;gap:10px;padding:10px 12px}
+.post .hd img{width:34px;height:34px;border-radius:50%;object-fit:cover}
+.post .hd .nm{font-weight:800}
+.post .hd .tm{color:var(--mut);font-size:12px}
+.post .hd .sp{flex:1}
+.ph{width:100%;display:block;background:var(--card2);min-height:200px;object-fit:contain}
+.ph.ld{animation:pulse 1.2s infinite}
+@keyframes pulse{50%{opacity:.5}}
+.post .cap{padding:10px 12px 0;white-space:pre-wrap;word-wrap:break-word}
+.reacts{display:flex;gap:6px;padding:10px 12px 12px;flex-wrap:wrap}
+.reacts button{background:var(--card2);border-radius:20px;padding:5px 10px;font-size:15px;border:1px solid transparent}
+.reacts button.on{border-color:var(--lime);background:#26300f}
+.reacts button small{font-size:12px;margin-left:3px;color:var(--mut)}
+.sec{font-family:Bangers,cursive;font-size:24px;letter-spacing:1px;margin:18px 0 10px;color:var(--txt);font-weight:400}
+.sec small{font-family:Inter;font-size:12px;color:var(--mut);letter-spacing:0;margin-left:6px}
+.empty{color:var(--mut);text-align:center;padding:28px 10px;background:var(--card);border-radius:var(--r);border:1px dashed var(--line)}
+.day{background:var(--card);border-radius:var(--r);padding:12px;margin-bottom:12px;border:1px solid var(--line)}
+.day .dh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.day .dh b{text-transform:capitalize}
+.day .dh span{font-size:12px;color:var(--mut)}
+.thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.thumbs .t{position:relative;aspect-ratio:1;border-radius:10px;overflow:hidden;background:var(--card2)}
+.thumbs .t img.ph{width:100%;height:100%;object-fit:cover;min-height:0}
+.thumbs .t .who{position:absolute;left:0;right:0;bottom:0;font-size:10px;padding:10px 4px 3px;background:linear-gradient(transparent,rgba(0,0,0,.8));white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fails{margin-top:8px;font-size:13px;color:#ffb3cf}
+.row{display:flex;align-items:center;gap:10px;background:var(--card);border-radius:14px;padding:10px 12px;margin-bottom:8px;border:1px solid var(--line)}
+.row img.av{width:40px;height:40px;border-radius:50%;object-fit:cover;flex:none}
+.row .mid{flex:1;min-width:0}
+.row .mid b{display:block}
+.row .mid small{color:var(--mut)}
+.row .cast{margin-top:4px;font-size:13px;color:var(--yellow)}
+.tag{font-size:11px;font-weight:800;padding:3px 8px;border-radius:20px;background:var(--card2);white-space:nowrap}
+.tag.p{background:#3a1030;color:#ff9fd2}.tag.c{background:#1f3307;color:var(--lime)}.tag.f{background:#0b2a33;color:var(--cyan)}
+.acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.rank{width:100%;border-collapse:collapse;background:var(--card);border-radius:var(--r);overflow:hidden}
+.rank th,.rank td{padding:10px 8px;text-align:center;border-bottom:1px solid var(--line);font-size:14px}
+.rank th{font-size:12px;color:var(--mut);font-weight:600}
+.rank td.n{text-align:left;display:flex;align-items:center;gap:8px;font-weight:700}
+.rank td.n img{width:30px;height:30px;border-radius:50%;object-fit:cover}
+.listc{list-style:none;padding:0;margin:0}
+.listc li{display:flex;align-items:center;gap:8px;padding:9px 12px;background:var(--card);border-radius:12px;margin-bottom:6px;font-size:14px}
+.listc li span{flex:1}
+.addrow{display:flex;gap:8px;margin-top:8px}
+.inp{flex:1;background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:12px;outline:none;min-width:0}
+.inp:focus{border-color:var(--lime)}
+.x{width:30px;height:30px;border-radius:50%;background:var(--card2);color:var(--mut);font-size:14px;flex:none}
+.cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ccard{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:12px 6px;text-align:center}
+.ccard.on{border-color:var(--pink);background:linear-gradient(160deg,#3a1030,var(--card) 70%)}
+.ccard .ce{font-size:30px}
+.ccard .cn{font-family:Bangers,cursive;font-size:34px;line-height:1.05;color:var(--lime)}
+.ccard .cl{font-size:12px;font-weight:700}
+.ccard .cm{font-size:11px;color:var(--mut);margin-top:2px}
+.ccard.add{border-style:dashed;color:var(--mut)}
+.seg{display:flex;background:var(--card);border-radius:12px;padding:4px;margin:12px 0 0;gap:4px}
+.seg button{flex:1;padding:8px;border-radius:9px;font-size:13px;font-weight:700;color:var(--mut)}
+.seg button.on{background:var(--card2);color:var(--txt)}
+select.inp{width:100%;appearance:none;-webkit-appearance:none}
+input[type=date].inp{color-scheme:dark}
+/* overlays */
+.ov{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.82);display:flex;align-items:center;justify-content:center;padding:16px}
+.modal{background:var(--card);border-radius:22px;padding:22px;width:100%;max-width:420px;border:1px solid var(--line);max-height:90vh;overflow:auto}
+.modal h3{font-family:Bangers,cursive;font-size:30px;letter-spacing:1px;margin:0 0 8px;font-weight:400;color:var(--lime)}
+.modal p{color:var(--mut);margin:0 0 14px}
+.modal .btns{display:flex;gap:8px;margin-top:14px}
+.modal .btns .btn{flex:1}
+.slot{font-family:Bangers,cursive;font-size:26px;letter-spacing:.5px;text-align:center;padding:22px 12px;border-radius:16px;background:#111;border:3px solid var(--yellow);color:var(--yellow);min-height:110px;display:flex;align-items:center;justify-content:center;margin:12px 0}
+.slot.spin{animation:shake .12s infinite}
+@keyframes shake{50%{transform:translateY(2px)}}
+.lb{flex-direction:column;padding:0}
+.lb img{max-width:100%;max-height:72vh;object-fit:contain}
+.lb .info{width:100%;max-width:640px;padding:12px 16px}
+.lb .close{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.12);font-size:20px}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#fff;color:#111;padding:11px 16px;border-radius:12px;font-weight:600;z-index:200;max-width:90vw;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,.4)}
+/* editor */
+.ed{position:fixed;inset:0;z-index:90;background:#09090b;display:flex;flex-direction:column}
+.ed .eh{display:flex;align-items:center;gap:8px;padding:10px 12px;padding-top:calc(10px + env(safe-area-inset-top))}
+.ed .eh .t{flex:1;font-family:Bangers,cursive;font-size:24px;letter-spacing:1px;color:var(--lime)}
+.ed .stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:6px;position:relative}
+.ed canvas{max-width:100%;max-height:100%;touch-action:none;border-radius:8px;box-shadow:0 10px 40px rgba(0,0,0,.6);background:#222}
+.ed .pick{text-align:center;color:var(--mut)}
+.ed .pick .btn{margin-top:14px}
+.selbar{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);display:flex;align-items:center;gap:8px;background:rgba(30,30,36,.95);padding:8px 10px;border-radius:14px;border:1px solid var(--line);font-size:12px;white-space:nowrap}
+.selbar input[type=range]{width:90px;accent-color:var(--lime)}
+.ed .tools{background:#141418;border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+.ttabs{display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--line)}
+.ttabs button{flex:1;padding:11px 10px;font-size:13px;font-weight:700;color:var(--mut);white-space:nowrap}
+.ttabs button.on{color:var(--lime);box-shadow:inset 0 -2px var(--lime)}
+.tpanel{padding:10px 12px;min-height:118px;max-height:34vh;overflow-y:auto}
+.hscroll{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
+.fbtn{flex:none;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;color:var(--mut)}
+.fbtn img{width:64px;height:64px;border-radius:12px;object-fit:cover;border:2px solid transparent}
+.fbtn.on{color:var(--lime)}.fbtn.on img{border-color:var(--lime)}
+.stk{display:grid;grid-template-columns:repeat(auto-fill,minmax(44px,1fr));gap:4px}
+.stk button{font-size:30px;padding:4px;border-radius:10px}
+.stk button:active{background:var(--card2)}
+.sw{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sw button{width:30px;height:30px;border-radius:50%;border:2px solid #444}
+.sw button.on{outline:3px solid var(--lime);outline-offset:2px}
+.fonts{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:8px 0}
+.fonts button{flex:none;padding:6px 12px;border-radius:10px;background:var(--card2);font-size:17px}
+.fonts button.on{background:var(--lime);color:#111}
+.quick{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.quick button{padding:5px 10px;border-radius:20px;background:var(--card2);font-size:12px;font-weight:700}
+.lbl{font-size:12px;color:var(--mut);margin:0 0 6px}
+.frames{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.frames button{flex:none;padding:10px 14px;border-radius:12px;background:var(--card2);font-weight:700;font-size:13px}
+.frames button.on{background:var(--lime);color:#111}
+.ed .foot{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--line)}
+.ed .foot .inp{padding:11px}
+.toggle{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--mut);margin-left:6px}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <header class="top">
+    <div class="logo">TALIBANES</div>
+    <div class="sp"></div>
+    <div class="clock" id="clock"></div>
+    <img class="meav" id="meav" alt="" style="display:none">
+  </header>
+  <div id="banners"></div>
+  <main id="main"></main>
+</div>
+<nav class="tabs"><div class="in" id="tabs"></div></nav>
+
+<script>
+"use strict";
+/* ---------------- helpers ---------------- */
+function h(tag, props, ...kids){
+  const el = document.createElement(tag);
+  if (props) for (const [k,v] of Object.entries(props)){
+    if (v===false || v==null) continue;
+    if (k==='class') el.className=v;
+    else if (k==='style') el.style.cssText=v;
+    else if (k==='text') el.textContent=v;
+    else if (k.startsWith('on')) el.addEventListener(k.slice(2), v);
+    else el.setAttribute(k, v===true?'':v);
+  }
+  for (const c of kids.flat()){ if (c==null||c===false) continue; el.append(c instanceof Node?c:document.createTextNode(String(c))); }
+  return el;
+}
+const $ = id => document.getElementById(id);
+const sleep = ms => new Promise(r=>setTimeout(r,ms));
+function ymd(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function today(){ return ymd(new Date()); }
+function addDays(s,n){ const [y,m,d]=s.split('-').map(Number); return ymd(new Date(y,m-1,d+n)); }
+function parseD(s){ const [y,m,d]=s.split('-').map(Number); return new Date(y,m-1,d); }
+function fmtDay(s){
+  const t=today();
+  if (s===t) return 'Hoy';
+  if (s===addDays(t,-1)) return 'Ayer';
+  return parseD(s).toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'short'});
+}
+function fmtShort(s){ return parseD(s).toLocaleDateString('es-ES',{day:'2-digit',month:'2-digit',year:'numeric'}); }
+function fmtTime(ts){ return ts? new Date(ts).toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'}) : ''; }
+function untilMidnight(){ const n=new Date(); const m=new Date(n.getFullYear(),n.getMonth(),n.getDate()+1); const mins=Math.max(0,Math.floor((m-n)/60000)); return Math.floor(mins/60)+'h '+String(mins%60).padStart(2,'0')+'m'; }
+function hash(str){ let h=2166136261; for (let i=0;i<str.length;i++){ h^=str.charCodeAt(i); h=Math.imul(h,16777619);} return h>>>0; }
+let toastT;
+function toast(msg){ document.querySelectorAll('.toast').forEach(t=>t.remove()); const t=h('div',{class:'toast',text:msg}); document.body.append(t); clearTimeout(toastT); toastT=setTimeout(()=>t.remove(),3200); }
+function ask(title, text, okLabel='Sí', danger=false){
+  return new Promise(res=>{
+    const ov=h('div',{class:'ov'}, h('div',{class:'modal'},
+      h('h3',{text:title}), h('p',{text:text}),
+      h('div',{class:'btns'},
+        h('button',{class:'btn ghost',text:'Cancelar',onclick:()=>{ov.remove();res(false);}}),
+        h('button',{class:'btn'+(danger?' pink':''),text:okLabel,onclick:()=>{ov.remove();res(true);}}))));
+    document.body.append(ov);
+  });
+}
+
+/* ---------------- constants ---------------- */
+const DEFAULT_CASTIGOS = [
+  'Paga la primera ronda en la próxima quedada',
+  'Foto de perfil elegida por el grupo durante 24 h',
+  'Audio de 1 minuto cantando en el grupo',
+  'Mañana sube la foto con la cara más fea posible',
+  'Invita a cafés al próximo que lo pida',
+  'Lleva la prenda más ridícula a la próxima quedada',
+  'Sube una story con la foto que elija el grupo',
+  'Hace de chófer en la próxima salida',
+  '20 flexiones grabadas en vídeo',
+  'Manda un piropo personalizado a cada uno del grupo',
+  'Un día entero firmando cada mensaje con "perdón por fallar 🙏"',
+  'Le toca organizar y reservar el próximo plan'
+];
+const DEFAULT_CONTADORES = [{k:'fiestas',e:'🎉',n:'Fiestas'},{k:'salidas',e:'🪩',n:'Salir de fiesta'},{k:'besos',e:'💋',n:'Besos'}];
+const REACTS = ['🔥','😂','💀','👑','🤡','❤️'];
+const STICKERS = ['🔥','😂','💀','👑','🍺','🍻','🎉','😎','🤡','💩','❤️','🥵','🫡','👀','🤙','🍕','⭐','💯','🐐','🌚','😈','🥳','🤯','😭','💪','🙏','✌️','🫶','☀️','🌈','⚡','💥','🎂','⚽','🏆','🎮','🍔','🌮','🍟','🍷','🥂','🚀','📸','💅','🧢','🕶️','🦄','🐸','💤','🤓','🥶','🤑','👻','🍆','🍑','💦','🌶️','🧠','🫠','🤌'];
+const COLORS = ['#ffffff','#111111','#c6ff3d','#ff3da5','#3dd9ff','#ffd23d','#ff5a36','#8b5cff'];
+const FONTS = ['Bangers','Permanent Marker','Pacifico','Anton','Inter'];
+const FILTERS = [['none','Original'],['pop','Pop'],['calido','Cálido'],['frio','Frío'],['vintage','Vintage'],['sepia','Sepia'],['bn','B/N'],['noir','Noir'],['rosa','Rosita'],['acido','Ácido']];
+const FRAMES = [['none','Sin marco'],['polaroid','Polaroid'],['banner','Banda TALIBANES'],['sello','Sello'],['neon','Neón'],['cine','Cine']];
+
+/* ---------------- state ---------------- */
+const S = {
+  db:null, user:null, uid:null, owner:false, readOnly:false, offline:false,
+  loaded:{members:false,posts:false}, slow:false,
+  members:{}, posts:{}, castigos:{}, config:null, profiles:{}, eventos:{},
+  cntSel:'fiestas', cntRange:'mes', cntFor:null,
+  imgCache:new Map(), tab:'hoy', joinShown:false, lastDay:today()
+};
+function memberIds(){ return Object.keys(S.members).sort((a,b)=>(S.members[a].joinedAt||0)-(S.members[b].joinedAt||0)); }
+Object.defineProperty(S,'owner',{get(){ return !!(S.uid && S.config && S.config.admin===S.uid); }});
+function nameOf(uid){ return (S.members[uid]&&S.members[uid].apodo) || 'Alguien'; }
+function initialsAvatar(uid){
+  const n = nameOf(uid); const hue = hash(uid||'x')%360;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80"><rect width="80" height="80" fill="hsl(${hue},70%,45%)"/><text x="40" y="52" font-family="Arial" font-weight="bold" font-size="34" fill="#fff" text-anchor="middle">${(n[0]||'?').toUpperCase().replace(/[<&>"]/g,'')}</text></svg>`;
+  return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+}
+function avatarOf(uid){
+  const p=S.profiles[uid];
+  if (p && p.name && p.avatarUrl) return p.avatarUrl;
+  return initialsAvatar(uid);
+}
+function castigoList(){ const l = S.config && Array.isArray(S.config.castigos) ? S.config.castigos : null; return (l && l.length) ? l : DEFAULT_CASTIGOS; }
+const pid = (date,uid)=> date+'__'+uid;
+function iAmMember(){ return !!(S.uid && S.members[S.uid]); }
+function canAct(){ return !!(S.db && S.uid && !S.readOnly); }
+
+/* write wrapper */
+async function W(fn){
+  try { await fn(); return true; }
+  catch(e){
+    const c = e && e.code;
+    if (c==='unavailable'){ await sleep(700+Math.random()*800); try{ await fn(); return true; }catch(e2){ toast('Problema de conexión, inténtalo otra vez'); return false; } }
+    if (c==='permission-denied'){ toast('Sin permiso para guardar. Recarga la app.'); return false; }
+    if (c==='not-found'){ toast('Eso ya no existe. Recarga.'); return false; }
+    if (c==='resource-exhausted'){ toast('Límite gratuito del día alcanzado o vas muy rápido. Prueba más tarde.'); return false; }
+    toast('Error: '+((e&&e.message)||c||'desconocido')); return false;
+  }
+}
+
+/* ---------------- computations ---------------- */
+function missedList(){
+  const t=today(), y=addDays(t,-1), min=addDays(t,-120), out=[];
+  for (const uid of memberIds()){
+    const m=S.members[uid]; let d=addDays(m.joined||t,1); if (d<min) d=min;
+    for (let x=d; x<=y; x=addDays(x,1)) if (!S.posts[pid(x,uid)]) out.push({date:x,uid});
+  }
+  return out.sort((a,b)=> b.date.localeCompare(a.date) || nameOf(a.uid).localeCompare(nameOf(b.uid)));
+}
+function streak(uid){ let d=today(); if (!S.posts[pid(d,uid)]) d=addDays(d,-1); let n=0; while (S.posts[pid(d,uid)]){ n++; d=addDays(d,-1); } return n; }
+function bestStreak(uid){
+  const ds=Object.values(S.posts).filter(p=>p.uid===uid).map(p=>p.date).sort(); let best=0,cur=0,prev=null;
+  for (const d of ds){ cur = (prev && addDays(prev,1)===d) ? cur+1 : 1; best=Math.max(best,cur); prev=d; } return best;
+}
+
+/* ---------------- image loading ---------------- */
+let io=null;
+function imgFor(id, post, cls='ph'){
+  const key = id+'@'+(post.ts||0);
+  const im = h('img',{class:cls,alt:''});
+  if (S.imgCache.has(key)){ im.src=S.imgCache.get(key); return im; }
+  im.classList.add('ld'); im.dataset.key=key; im.dataset.id=id;
+  if (!io) io = new IntersectionObserver(ents=>{ for (const e of ents) if (e.isIntersecting){ io.unobserve(e.target); fetchImg(e.target); } },{rootMargin:'300px'});
+  io.observe(im);
+  return im;
+}
+const inflight=new Map();
+async function fetchImg(im){
+  const key=im.dataset.key, id=im.dataset.id;
+  if (S.imgCache.has(key)){ im.src=S.imgCache.get(key); im.classList.remove('ld'); return; }
+  if (!S.db) return;
+  let p = inflight.get(key);
+  if (!p){ p = S.db.doc('imgs/'+id).get().then(s=> s.exists ? (s.data().data||'') : '').catch(()=> ''); inflight.set(key,p); }
+  const data = await p; inflight.delete(key);
+  if (data){ S.imgCache.set(key,data); im.src=data; }
+  im.classList.remove('ld');
+}
+
+/* ---------------- render ---------------- */
+function renderAll(){
+  renderClock(); renderBanners(); renderTabs(); renderMain(); renderMe();
+}
+function renderClock(){
+  const c=$('clock'); c.textContent='';
+  c.append(h('div',null,'⏰ cierre en'), h('b',{text:untilMidnight()}));
+}
+function renderMe(){
+  const im=$('meav');
+  if (iAmMember()){ im.src=avatarOf(S.uid); im.style.display=''; im.onclick=editApodo; im.title='Cambiar apodo'; }
+  else im.style.display='none';
+}
+function renderBanners(){
+  const b=$('banners'); b.textContent='';
+  if (S.offline) b.append(h('div',{class:'banner'},'⚠️ No se pudo conectar con la base de datos. Revisa tu conexión y recarga. Mientras, puedes probar el editor.'));
+  else if (S.slow && !S.loaded.posts) b.append(h('div',{class:'banner'},'Conectando con la base de datos… si tarda, revisa tu conexión.'));
+}
+function renderTabs(){
+  const t=$('tabs'); t.textContent='';
+  const pend = S.loaded.posts ? missedList().filter(m=>{ const c=S.castigos[pid(m.date,m.uid)]; return !c || c.estado==='pendiente'; }).length : 0;
+  for (const [k,i,l] of [['hoy','📸','Hoy'],['cnt','🎉','Contadores'],['cast','⛓️','Castigos'+(pend?` (${pend})`:'')],['rank','🏆','Ranking'],['hist','🗓️','Historial']])
+    t.append(h('button',{class:S.tab===k?'on':'',onclick:()=>{S.tab=k; renderAll(); window.scrollTo({top:0});}}, h('span',{class:'i',text:i}), l));
+}
+function renderMain(){
+  const m=$('main'); const a=document.activeElement;
+  if (a && m.contains(a) && /^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName) && a.type!=='checkbox'){
+    if (!a.dataset.deferred){ a.dataset.deferred='1'; a.addEventListener('blur',()=>setTimeout(renderMain,400),{once:true}); }
+    return;
+  }
+  m.textContent='';
+  if (S.tab==='hoy') renderHoy(m);
+  else if (S.tab==='hist') renderHist(m);
+  else if (S.tab==='cast') renderCast(m);
+  else if (S.tab==='cnt') renderCnt(m);
+  else renderRank(m);
+}
+
+function reactBar(id, post){
+  const r = post.r || {}; const mine = S.uid ? r[S.uid] : '';
+  const counts={}; for (const v of Object.values(r)) if (v) counts[v]=(counts[v]||0)+1;
+  return h('div',{class:'reacts'}, REACTS.map(e=> h('button',{class:mine===e?'on':'', onclick:async ev=>{
+    ev.stopPropagation();
+    if (!canAct()) return toast('Únete al grupo para reaccionar');
+    const nv = mine===e ? '' : e;
+    await W(()=>S.db.doc('posts/'+id).update({['r.'+S.uid]:nv}));
+  }}, e, counts[e]? h('small',{text:counts[e]}) : null)));
+}
+function postCard(id, post){
+  const del = (S.uid===post.uid || S.owner) && canAct();
+  return h('div',{class:'post'},
+    h('div',{class:'hd'}, h('img',{src:avatarOf(post.uid),alt:''}),
+      h('div',null, h('div',{class:'nm',text:nameOf(post.uid)}), h('div',{class:'tm',text:fmtDay(post.date)+' · '+fmtTime(post.ts)+(post.live===true?' · 📸 en directo':post.live===false?' · 🖼️ de galería':'')})),
+      h('div',{class:'sp'}),
+      del? h('button',{class:'x',title:'Borrar',text:'🗑',onclick:()=>deletePost(id,post)}) : null),
+    (()=>{ const im=imgFor(id,post); im.onclick=()=>lightbox(id,post); return im; })(),
+    post.caption? h('div',{class:'cap',text:post.caption}) : null,
+    reactBar(id,post));
+}
+async function deletePost(id, post){
+  if (!await ask('¿Borrar foto?', `Se borrará la foto de ${nameOf(post.uid)} del ${fmtShort(post.date)}. Si es de hoy, tendrá que subir otra.`, 'Borrar', true)) return;
+  if (await W(()=>S.db.doc('posts/'+id).delete())) { await W(()=>S.db.doc('imgs/'+id).delete()); toast('Foto borrada'); }
+}
+
+function renderHoy(m){
+  const t=today(); const ids=memberIds();
+  if (!S.offline && !S.loaded.members){ m.append(h('div',{class:'empty'},'Cargando a los Talibanes…')); return; }
+  const myPost = S.uid && S.posts[pid(t,S.uid)];
+  let tipOff=false; try{ tipOff=localStorage.getItem('tb_tip')==='1'; }catch(_){}
+  if (!tipOff){
+    const tip=h('div',{class:'row',style:'border-color:#2b4a52;background:#0f2228'},
+      h('div',{style:'font-size:28px',text:'📲'}),
+      h('div',{class:'mid'}, h('b',{text:'Tenla como app en el móvil'}),
+        h('small',{text:'Safari: Compartir → "Añadir a pantalla de inicio". Chrome: ⋮ → "Instalar app". Al abrir el icono, entra con tu nombre y PIN.'})),
+      h('button',{class:'x',text:'✕',onclick:()=>{ try{localStorage.setItem('tb_tip','1');}catch(_){} tip.remove(); }}));
+    m.append(tip);
+  }
+  if (S.offline){
+    m.append(h('div',{class:'hero warn'}, h('h2',{text:'Foto del día'}), h('p',{text:'Prueba el editor: filtros, stickers, texto y dibujo.'}), h('button',{class:'btn big',onclick:openEditor},'📸 Probar editor')));
+  } else if (!iAmMember()){
+    m.append(h('div',{class:'hero warn'}, h('h2',{text:'¿Eres Talibán?'}), h('p',{text:'Únete al grupo para subir tu foto diaria. Quien no la sube antes de las 00:00… castigo.'}),
+      h('button',{class:'btn big',onclick:showJoin},'🤝 Entrar / Unirme')));
+  } else if (myPost){
+    const im=imgFor(pid(t,S.uid),myPost,'myimg');
+    m.append(h('div',{class:'hero ok'}, im, h('h2',{text:'✅ Cumplido'}), h('p',{text:`Hoy te libras del castigo. Racha: ${streak(S.uid)} 🔥`}),
+      h('button',{class:'btn ghost sm',onclick:openEditor},'🔁 Cambiar mi foto')));
+  } else {
+    m.append(h('div',{class:'hero warn'}, h('h2',{text:'📸 Te falta la foto'}), h('p',{text:`Te quedan ${untilMidnight()} para subirla o te cae castigo.`}),
+      h('button',{class:'btn big pink',onclick:openEditor},'Subir foto del día')));
+  }
+  if (ids.length){
+    const done = ids.filter(u=>S.posts[pid(t,u)]);
+    m.append(h('div',{class:'prog'}, h('span',{text:`${done.length}/${ids.length} han cumplido`}), h('div',{class:'bar'}, h('i',{style:`width:${ids.length?done.length/ids.length*100:0}%`}))));
+    m.append(h('div',{class:'chips'}, ids.map(u=>{ const ok=!!S.posts[pid(t,u)]; return h('div',{class:'chip '+(ok?'done':'miss')}, h('img',{class:'av',src:avatarOf(u),alt:''}), h('span',{text:(ok?'✅ ':'⏳ ')+nameOf(u)})); })));
+  }
+  const today_posts = Object.entries(S.posts).filter(([,p])=>p.date===t).sort((a,b)=>(b[1].ts||0)-(a[1].ts||0));
+  m.append(h('div',{class:'sec'},'Fotos de hoy', h('small',{text:fmtShort(t)})));
+  if (!today_posts.length) m.append(h('div',{class:'empty'},'Nadie ha subido nada todavía. Sé el primero 👀'));
+  for (const [id,p] of today_posts) m.append(postCard(id,p));
+}
+
+function renderHist(m){
+  const t=today(); const ids=memberIds();
+  const joins = ids.map(u=>S.members[u].joined).filter(Boolean).sort();
+  const postDates = Object.values(S.posts).map(p=>p.date).sort();
+  let start = [joins[0], postDates[0]].filter(Boolean).sort()[0] || t;
+  const min = addDays(t,-60); if (start<min) start=min;
+  m.append(h('div',{class:'sec'},'Historial', h('small',{text:'últimos días'})));
+  let any=false;
+  for (let d=addDays(t,-1); d>=start; d=addDays(d,-1)){
+    any=true;
+    const posts = Object.entries(S.posts).filter(([,p])=>p.date===d).sort((a,b)=>(a[1].ts||0)-(b[1].ts||0));
+    const expected = ids.filter(u=> S.members[u].joined && addDays(S.members[u].joined,1)<=d);
+    const failed = expected.filter(u=>!S.posts[pid(d,u)]);
+    m.append(h('div',{class:'day'},
+      h('div',{class:'dh'}, h('b',{text:fmtDay(d)}), h('span',{text:`${posts.length} foto${posts.length===1?'':'s'}`})),
+      posts.length? h('div',{class:'thumbs'}, posts.map(([id,p])=>{ const im=imgFor(id,p); return h('div',{class:'t',onclick:()=>lightbox(id,p)}, im, h('div',{class:'who',text:nameOf(p.uid)})); })) : h('div',{class:'fails',style:'color:var(--mut)'},'Sin fotos este día'),
+      failed.length? h('div',{class:'fails',text:'💀 No subieron: '+failed.map(nameOf).join(', ')}) : (expected.length? h('div',{class:'fails',style:'color:var(--lime)',text:'👏 Todos cumplieron'}) : null)));
+  }
+  if (!any) m.append(h('div',{class:'empty'},'Aún no hay días pasados. Vuelve mañana 😉'));
+}
+
+function renderCast(m){
+  const miss = missedList();
+  m.append(h('div',{class:'sec'},'Muro de la vergüenza', h('small',{text:`${miss.length} fallo${miss.length===1?'':'s'}`})));
+  if (!miss.length) m.append(h('div',{class:'empty'},'Nadie ha fallado todavía. Disfrutad mientras dure 😇'));
+  for (const {date,uid} of miss){
+    const id=pid(date,uid); const c=S.castigos[id];
+    const estado = c ? c.estado : null;
+    const tag = !c ? h('span',{class:'tag p',text:'SIN CASTIGO'}) : estado==='cumplido' ? h('span',{class:'tag c',text:'CUMPLIDO'}) : estado==='perdonado' ? h('span',{class:'tag f',text:'PERDONADO'}) : h('span',{class:'tag p',text:'PENDIENTE'});
+    const acts = h('div',{class:'acts'});
+    if (canAct() && iAmMember()){
+      if (!c) acts.append(h('button',{class:'btn sm',onclick:()=>ruleta(date,uid)},'🎰 Girar ruleta'));
+      else if (estado==='pendiente'){
+        acts.append(h('button',{class:'btn sm ghost',onclick:()=>W(()=>S.db.doc('castigos/'+id).update({estado:'cumplido',doneBy:S.uid}))},'✅ Cumplido'));
+        if (S.owner) acts.append(h('button',{class:'btn sm ghost',onclick:()=>W(()=>S.db.doc('castigos/'+id).update({estado:'perdonado'}))},'🙏 Perdonar'));
+      } else if (S.owner) acts.append(h('button',{class:'btn sm ghost',onclick:()=>W(()=>S.db.doc('castigos/'+id).update({estado:'pendiente'}))},'↩️ Reabrir'));
+    }
+    m.append(h('div',{class:'row'}, h('img',{class:'av',src:avatarOf(uid),alt:''}),
+      h('div',{class:'mid'}, h('b',{text:nameOf(uid)}), h('small',{text:'No subió foto el '+fmtDay(date).toLowerCase()+(fmtDay(date).includes(' ')?'':' ('+fmtShort(date)+')')}),
+        c? h('div',{class:'cast',text:'⛓️ '+c.castigo}) : null, acts.childNodes.length? acts : null),
+      tag));
+  }
+  // list of castigos
+  m.append(h('div',{class:'sec'},'Lista de castigos', h('small',{text:'la ruleta elige uno'})));
+  const list = castigoList();
+  m.append(h('ul',{class:'listc'}, list.map((c,i)=> h('li',null, h('span',{text:c}), (S.owner&&canAct())? h('button',{class:'x',text:'✕',title:'Quitar',onclick:async()=>{ const nl=list.slice(); nl.splice(i,1); await W(()=>S.db.doc('config/main').set({...(S.config||{}), castigos:nl})); }}) : null))));
+  if (canAct() && iAmMember()){
+    const inp=h('input',{class:'inp',placeholder:'Añadir castigo nuevo…',maxlength:'120'});
+    const add=async()=>{ const v=inp.value.trim(); if(!v) return; const nl=[...castigoList(), v]; if (await W(()=>S.db.doc('config/main').set({...(S.config||{}), castigos:nl}))){ inp.value=''; toast('Castigo añadido 😈'); } };
+    inp.addEventListener('keydown',e=>{ if(e.key==='Enter') add(); });
+    m.append(h('div',{class:'addrow'}, inp, h('button',{class:'btn',onclick:add},'Añadir')));
+  }
+}
+
+function renderRank(m){
+  const ids=memberIds(); const miss=missedList();
+  const rows = ids.map(u=>{
+    const fotos=Object.values(S.posts).filter(p=>p.uid===u).length;
+    const fallos=miss.filter(x=>x.uid===u).length;
+    const pend=miss.filter(x=>x.uid===u && (!S.castigos[pid(x.date,u)] || S.castigos[pid(x.date,u)].estado==='pendiente')).length;
+    return {u,fotos,fallos,pend,racha:streak(u),best:bestStreak(u)};
+  }).sort((a,b)=> b.racha-a.racha || b.fotos-a.fotos || a.fallos-b.fallos);
+  m.append(h('div',{class:'sec'},'Ranking', h('small',{text:'por racha actual'})));
+  if (!rows.length){ m.append(h('div',{class:'empty'},'Todavía no hay nadie en el grupo.')); return; }
+  m.append(h('table',{class:'rank'},
+    h('tr',null, h('th',{style:'text-align:left'},'Talibán'), h('th',null,'🔥 Racha'), h('th',null,'📸'), h('th',null,'💀'), h('th',null,'⛓️')),
+    rows.map((r,i)=> h('tr',null,
+      h('td',{class:'n'}, h('span',{text:i===0?'👑':(i+1)+'.'}), h('img',{src:avatarOf(r.u),alt:''}), h('span',{text:nameOf(r.u)})),
+      h('td',null, h('b',{text:r.racha}), h('div',{style:'font-size:10px;color:var(--mut)',text:'máx '+r.best})),
+      h('td',{text:r.fotos}), h('td',{text:r.fallos}), h('td',{text:r.pend})))));
+  m.append(h('p',{style:'font-size:12px;color:var(--mut);margin-top:8px'},'📸 fotos subidas · 💀 días sin foto · ⛓️ castigos pendientes. Los fallos cuentan desde el día siguiente a unirse.'));
+  const worst = rows.slice().sort((a,b)=>b.fallos-a.fallos)[0];
+  if (worst && worst.fallos>0) m.append(h('div',{class:'hero warn',style:'margin-top:14px'}, h('h2',{text:'🤡 El más vago'}), h('p',{style:'margin:0',text:`${nameOf(worst.u)} con ${worst.fallos} día${worst.fallos===1?'':'s'} sin foto.`})));
+  if (S.owner && canAct()){
+    m.append(h('div',{class:'sec'},'Ajustes del grupo', h('small',{text:'solo tú lo ves'})));
+    const g=h('input',{type:'checkbox',style:'width:22px;height:22px;accent-color:var(--lime)'}); g.checked=galeriaOK();
+    g.onchange=()=>W(()=>S.db.doc('config/main').set({...(S.config||{}), galeria:g.checked}));
+    m.append(h('label',{class:'row'}, h('div',{class:'mid'}, h('b',{text:'Permitir fotos de la galería'}), h('small',{text:'Desactivado: solo valen fotos hechas en el momento. Activado: se aceptan, pero salen marcadas como "de galería".'})), g));
+    m.append(h('div',{class:'sec'},'Gestionar miembros', h('small',{text:'solo tú lo ves'})));
+    for (const u of ids) if (u!==S.uid) m.append(h('div',{class:'row'}, h('img',{class:'av',src:avatarOf(u),alt:''}), h('div',{class:'mid'}, h('b',{text:nameOf(u)}), h('small',{text:'desde '+fmtShort(S.members[u].joined||today())})),
+      h('button',{class:'btn sm ghost',onclick:async()=>{ if (await ask('¿Sacar del grupo?', `${nameOf(u)} dejará de contar en fotos y castigos.`, 'Sacar', true)) W(()=>S.db.doc('members/'+u).delete()); }},'Sacar')));
+  }
+}
+
+/* ---------------- contadores ---------------- */
+function contadores(){ const l=S.config&&Array.isArray(S.config.contadores)?S.config.contadores:null; return (l&&l.length)?l:DEFAULT_CONTADORES; }
+function eventosList(){ return Object.entries(S.eventos).map(([id,e])=>({id,...e})).filter(e=>e && e.tipo && e.date); }
+function inRange(e, r){ const t=today(); return r==='todo' || (r==='mes' ? e.date.slice(0,7)===t.slice(0,7) : e.date.slice(0,4)===t.slice(0,4)); }
+function burst(em){
+  for (let i=0;i<14;i++){
+    const s=h('div',{text:em,style:`position:fixed;left:50%;top:55%;font-size:${26+Math.random()*26}px;z-index:300;pointer-events:none;transition:transform 1s cubic-bezier(.2,.8,.3,1),opacity 1s`});
+    document.body.append(s);
+    requestAnimationFrame(()=>{ s.style.transform=`translate(${(Math.random()-.5)*320}px,${-120-Math.random()*260}px) rotate(${(Math.random()-.5)*90}deg)`; s.style.opacity='0'; });
+    setTimeout(()=>s.remove(),1100);
+  }
+}
+function renderCnt(m){
+  const list=contadores(); if (!list.find(c=>c.k===S.cntSel)) S.cntSel=list[0].k;
+  const c=list.find(x=>x.k===S.cntSel); const all=eventosList(); const ids=memberIds();
+  const rangeLbl={mes:'este mes',año:'este año',todo:'en total'}[S.cntRange];
+  m.append(h('div',{class:'sec'},'Contadores', h('small',{text:rangeLbl})));
+  m.append(h('div',{class:'cgrid'},
+    list.map(x=>{ const n=all.filter(e=>e.tipo===x.k && inRange(e,S.cntRange)).length; const mine=S.uid? all.filter(e=>e.tipo===x.k && e.uid===S.uid && inRange(e,S.cntRange)).length : 0;
+      return h('button',{class:'ccard'+(x.k===S.cntSel?' on':''),onclick:()=>{ S.cntSel=x.k; renderMain(); }},
+        h('div',{class:'ce',text:x.e}), h('div',{class:'cn',text:n}), h('div',{class:'cl',text:x.n}), iAmMember()? h('div',{class:'cm',text:'tú: '+mine}) : null); }),
+    (canAct()&&iAmMember())? h('button',{class:'ccard add',onclick:newCounter}, h('div',{class:'ce',text:'➕'}), h('div',{class:'cl',text:'Nuevo contador'})) : null));
+  m.append(h('div',{class:'seg'}, [['mes','Este mes'],['año','Este año'],['todo','Siempre']].map(([k,l])=>h('button',{class:S.cntRange===k?'on':'',onclick:()=>{ S.cntRange=k; renderMain(); }},l))));
+  // sumar
+  if (canAct() && iAmMember()){
+    if (!S.cntFor || !S.members[S.cntFor]) S.cntFor=S.uid;
+    const sel=h('select',{class:'inp'}, ids.map(u=>h('option',{value:u,selected:u===S.cntFor},u===S.uid?'Yo ('+nameOf(u)+')':nameOf(u))));
+    sel.onchange=()=>{ S.cntFor=sel.value; };
+    const note=h('input',{class:'inp',placeholder:'Detalles (opcional): dónde, con quién…',maxlength:'100'}); note.value=S.cntNote||''; note.oninput=()=>{ S.cntNote=note.value; };
+    const date=h('input',{class:'inp',type:'date',max:today(),style:'flex:0 0 150px'}); date.value=S.cntDate||today(); date.onchange=()=>{ S.cntDate=date.value; };
+    const btn=h('button',{class:'btn big pink',style:'margin-top:10px'},`+1 ${c.e} ${c.n}`);
+    btn.onclick=async()=>{
+      const d=(date.value && date.value<=today())? date.value : today(); const who=sel.value||S.uid;
+      btn.disabled=true;
+      const ok=await W(()=>S.db.collection('eventos').add({uid:who,tipo:c.k,date:d,ts:Date.now(),nota:(note.value||'').trim().slice(0,100),by:S.uid}));
+      btn.disabled=false;
+      if (ok){ burst(c.e); S.cntNote=''; note.value=''; toast(`+1 ${c.e} para ${who===S.uid?'ti':nameOf(who)}`); }
+    };
+    m.append(h('div',{class:'day',style:'margin-top:12px'},
+      h('div',{class:'lbl',text:'¿Para quién?'}), sel,
+      h('div',{class:'addrow'}, note, date), btn));
+  }
+  // ranking del contador
+  const counts=ids.map(u=>({u,n:all.filter(e=>e.tipo===c.k && e.uid===u && inRange(e,S.cntRange)).length})).sort((a,b)=>b.n-a.n);
+  const max=Math.max(1,...counts.map(x=>x.n));
+  m.append(h('div',{class:'sec'},`Ranking ${c.e}`, h('small',{text:c.n+' · '+rangeLbl})));
+  if (!counts.length) m.append(h('div',{class:'empty'},'Todavía no hay nadie en el grupo.'));
+  counts.forEach((x,i)=> m.append(h('div',{class:'row'},
+    h('span',{style:'width:22px;text-align:center;font-weight:800',text:(i===0&&x.n>0)?'👑':String(i+1)}),
+    h('img',{class:'av',src:avatarOf(x.u),alt:''}),
+    h('div',{class:'mid'}, h('b',{text:nameOf(x.u)}), h('div',{class:'bar',style:'margin-top:6px'}, h('i',{style:`width:${x.n/max*100}%`}))),
+    h('div',{style:'font-family:Bangers,cursive;font-size:26px;min-width:34px;text-align:right',text:x.n}))));
+  // actividad
+  const recent=all.filter(e=>e.tipo===c.k && inRange(e,S.cntRange)).sort((a,b)=> b.date.localeCompare(a.date) || (b.ts||0)-(a.ts||0)).slice(0,40);
+  m.append(h('div',{class:'sec'},'Últimos', h('small',{text:recent.length?'':'nada todavía'})));
+  if (!recent.length) m.append(h('div',{class:'empty'},`Nadie ha sumado ${c.n.toLowerCase()} ${rangeLbl}. ¿Quién abre la cuenta? ${c.e}`));
+  for (const e of recent){
+    const canDel = canAct() && (e.by===S.uid || e.uid===S.uid || S.owner);
+    m.append(h('div',{class:'row'}, h('img',{class:'av',src:avatarOf(e.uid),alt:''}),
+      h('div',{class:'mid'}, h('b',{text:`${nameOf(e.uid)} +1 ${c.e}`}),
+        h('small',{text:fmtDay(e.date)+(e.by&&e.by!==e.uid?` · apuntado por ${nameOf(e.by)}`:'')}),
+        e.nota? h('div',{style:'font-size:13px;margin-top:3px',text:e.nota}) : null),
+      canDel? h('button',{class:'x',text:'✕',title:'Quitar',onclick:async()=>{ if (await ask('¿Quitar este +1?', `${nameOf(e.uid)} · ${c.n} · ${fmtShort(e.date)}`,'Quitar',true)) W(()=>S.db.doc('eventos/'+e.id).delete()); }}) : null));
+  }
+}
+function newCounter(){
+  const em=h('input',{class:'inp',placeholder:'🍺',maxlength:'4',style:'flex:0 0 70px;text-align:center;font-size:22px'});
+  const nm=h('input',{class:'inp',placeholder:'Nombre (ej: Resacas)',maxlength:'24'});
+  const ov=h('div',{class:'ov'}, h('div',{class:'modal'}, h('h3',{text:'Nuevo contador'}), h('p',{text:'Todo el grupo podrá sumar en él.'}),
+    h('div',{class:'addrow'}, em, nm),
+    h('div',{class:'btns'}, h('button',{class:'btn ghost',text:'Cancelar',onclick:()=>ov.remove()}),
+      h('button',{class:'btn',text:'Crear',onclick:async()=>{ const n=nm.value.trim(); if(!n) return toast('Ponle un nombre');
+        const k='c'+Date.now().toString(36); const list=[...contadores(), {k, e:em.value.trim()||'⭐', n}];
+        if (await W(()=>S.db.doc('config/main').set({...(S.config||{}), contadores:list}))){ S.cntSel=k; ov.remove(); renderAll(); } }}))));
+  document.body.append(ov); setTimeout(()=>nm.focus(),50);
+}
+
+/* ---------------- modals ---------------- */
+async function pinHash(mid, pin){
+  const buf=await crypto.subtle.digest('SHA-256', new TextEncoder().encode('talibanes:'+mid+':'+pin));
+  return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+function setMe(mid){ S.uid=mid; try{ if(mid) localStorage.setItem('tb_mid',mid); else localStorage.removeItem('tb_mid'); }catch(_){} renderAll(); }
+function pinInput(ph){ return h('input',{class:'inp',type:'password',inputmode:'numeric',pattern:'[0-9]*',maxlength:'4',placeholder:ph||'PIN (4 cifras)',autocomplete:'off',style:'margin-top:8px;letter-spacing:6px;text-align:center'}); }
+function showJoin(){
+  if (S.joinOpen) return; S.joinOpen=true;
+  const ids=memberIds(); let mode = ids.length ? 'login' : 'new';
+  const box=h('div',{class:'modal'}); const ov=h('div',{class:'ov'},box); document.body.append(ov);
+  const close=()=>{ ov.remove(); S.joinOpen=false; };
+  const draw=()=>{
+    box.textContent='';
+    box.append(h('h3',{text: mode==='new'?'Únete a los Talibanes':'Entrar'}));
+    if (ids.length) box.append(h('div',{class:'seg',style:'margin:0 0 12px'},
+      h('button',{class:mode==='login'?'on':'',onclick:()=>{mode='login';draw();}},'Ya estoy dentro'),
+      h('button',{class:mode==='new'?'on':'',onclick:()=>{mode='new';draw();}},'Soy nuevo')));
+    if (mode==='new'){
+      box.append(h('p',{text:'Regla: una foto al día antes de las 00:00. Si no, la ruleta te asigna un castigo. Empiezas a contar desde mañana.'}));
+      const ap=h('input',{class:'inp',placeholder:'Tu apodo en el grupo',maxlength:'20'}); const pin=pinInput('Inventa un PIN (4 cifras)');
+      const go=async()=>{
+        const v=ap.value.trim(); if(!v) return toast('Pon un apodo');
+        if (ids.some(u=>nameOf(u).toLowerCase()===v.toLowerCase())) return toast('Ese apodo ya está cogido. Si eres tú, usa "Ya estoy dentro".');
+        if (!/^\d{4}$/.test(pin.value)) return toast('El PIN tiene que ser de 4 cifras');
+        const mid='m'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+        const t=today(); const ph=await pinHash(mid,pin.value);
+        if (!await W(()=>S.db.doc('members/'+mid).set({apodo:v, joined:t, joinedAt:Date.now(), pin:ph}))) return;
+        if (!S.config || !S.config.admin) await W(()=>S.db.doc('config/main').set({...(S.config||{}), admin:mid}));
+        setMe(mid); close(); toast('¡Bienvenido a los Talibanes! 🎉');
+      };
+      pin.addEventListener('keydown',e=>{ if(e.key==='Enter') go(); });
+      box.append(ap, pin, h('div',{style:'font-size:12px;color:var(--mut);margin-top:6px',text:'Apúntate el PIN: lo necesitarás para entrar desde otro móvil o desde el icono de la pantalla de inicio.'}),
+        h('div',{class:'btns'}, h('button',{class:'btn ghost',text:'Ahora no',onclick:close}), h('button',{class:'btn',text:'Unirme',onclick:go})));
+      setTimeout(()=>ap.focus(),50);
+    } else {
+      box.append(h('p',{text:'Elige quién eres y pon tu PIN.'}));
+      const sel=h('select',{class:'inp'}, h('option',{value:''},'— ¿Quién eres? —'), ids.map(u=>h('option',{value:u},nameOf(u))));
+      const pin=pinInput();
+      const go=async()=>{
+        const mid=sel.value; if(!mid) return toast('Elige tu nombre');
+        const m=S.members[mid]; if (!m) return;
+        if (!m.pin || await pinHash(mid,pin.value)===m.pin){ setMe(mid); close(); toast('¡Hola, '+nameOf(mid)+'! 👋'); }
+        else { pin.value=''; toast('PIN incorrecto'); }
+      };
+      pin.addEventListener('keydown',e=>{ if(e.key==='Enter') go(); });
+      box.append(sel, pin, h('div',{class:'btns'}, h('button',{class:'btn ghost',text:'Cancelar',onclick:close}), h('button',{class:'btn',text:'Entrar',onclick:go})));
+    }
+  };
+  draw();
+}
+function editApodo(){
+  const inp=h('input',{class:'inp',maxlength:'20',value:S.members[S.uid].apodo||''});
+  const pin=pinInput('Nuevo PIN (opcional)');
+  const ov=h('div',{class:'ov'}, h('div',{class:'modal'}, h('h3',{text:'Tu perfil'}), inp, pin,
+    h('div',{class:'btns'}, h('button',{class:'btn ghost',text:'Cancelar',onclick:()=>ov.remove()}),
+      h('button',{class:'btn',text:'Guardar',onclick:async()=>{
+        const v=inp.value.trim(); if(!v) return; const upd={apodo:v};
+        if (pin.value){ if (!/^\d{4}$/.test(pin.value)) return toast('El PIN tiene que ser de 4 cifras'); upd.pin=await pinHash(S.uid,pin.value); }
+        if (await W(()=>S.db.doc('members/'+S.uid).update(upd))){ ov.remove(); toast('Guardado'); } }})),
+    h('button',{class:'btn ghost sm',style:'margin-top:14px;width:100%',onclick:()=>{ ov.remove(); setMe(null); toast('Has salido. Entra con tu nombre y PIN.'); }},'🚪 Salir / cambiar de usuario')));
+  document.body.append(ov);
+}
+function lightbox(id, post){
+  const im=imgFor(id,post); im.classList.remove('ph'); im.style.minHeight='0';
+  const ov=h('div',{class:'ov lb',onclick:e=>{ if(e.target===ov) ov.remove(); }},
+    h('button',{class:'close',text:'✕',onclick:()=>ov.remove()}), im,
+    h('div',{class:'info'}, h('div',{style:'font-weight:800'}, nameOf(post.uid), h('span',{style:'color:var(--mut);font-weight:400',text:' · '+fmtDay(post.date)+' '+fmtTime(post.ts)})),
+      post.caption? h('div',{style:'margin-top:6px;white-space:pre-wrap',text:post.caption}) : null,
+      h('div',{style:'font-size:12px;color:var(--mut);margin-top:6px',text:'Mantén pulsada la foto para guardarla en el móvil.'})));
+  document.body.append(ov);
+  if (im.dataset.key && !im.src) fetchImg(im);
+}
+function ruleta(date, uid){
+  const list=castigoList(); const slot=h('div',{class:'slot spin',text:'…'});
+  const btns=h('div',{class:'btns'});
+  const ov=h('div',{class:'ov'}, h('div',{class:'modal'}, h('h3',{text:'🎰 Ruleta del castigo'}), h('p',{text:`${nameOf(uid)} no subió foto el ${fmtShort(date)}.`}), slot, btns));
+  document.body.append(ov);
+  const final = list[Math.floor(Math.random()*list.length)];
+  let i=0, delay=50; const start=Date.now();
+  const step=()=>{
+    if (Date.now()-start > 2600){ slot.textContent=final; slot.classList.remove('spin');
+      btns.append(h('button',{class:'btn ghost',text:'Cerrar',onclick:()=>ov.remove()}));
+      W(()=>S.db.doc('castigos/'+pid(date,uid)).set({uid,date,castigo:final,estado:'pendiente',by:S.uid,ts:Date.now()})).then(ok=>{ if(ok) toast('Castigo asignado 😈'); });
+      return; }
+    slot.textContent=list[i++%list.length]; delay*=1.08; setTimeout(step,delay);
+  };
+  step();
+}
+
+/* ---------------- editor ---------------- */
+const E = { ov:null, cv:null, ctx:null, img:null, base:null, W:0, H:0, filter:'none', frame:'none', objs:[], strokes:[], sel:-1,
+  mode:'move', tool:'filtros', brush:{color:'#ff3da5',size:14}, txt:{font:'Bangers',color:'#ffffff',outline:true},
+  hist:[], ptrs:new Map(), drag:null, pinch:null, cur:null, moved:false, cap:'' };
+
+function openEditor(){
+  if (!S.offline && !iAmMember()) return showJoin();
+  Object.assign(E,{img:null,base:null,filter:'none',frame:'none',objs:[],strokes:[],sel:-1,mode:'move',tool:'filtros',hist:[],ptrs:new Map(),drag:null,pinch:null,cur:null,cap:''});
+  FONTS.forEach(f=>document.fonts && document.fonts.load('40px "'+f+'"').then(()=>E.cv&&redraw()).catch(()=>{}));
+  E.ov = h('div',{class:'ed'}); document.body.append(E.ov); document.body.style.overflow='hidden';
+  renderEditor();
+}
+function closeEditor(){ if (E.ov) E.ov.remove(); E.ov=null; E.cv=null; document.body.style.overflow=''; }
+function galeriaOK(){ return !!(S.config && S.config.galeria); }
+function pickFile(mode){
+  if (typeof mode!=='string') mode='env';
+  const fi=h('input',{type:'file',accept:'image/*',style:'display:none'});
+  if (mode!=='gal') fi.setAttribute('capture', mode==='user'?'user':'environment');
+  fi.addEventListener('change',()=>{ const f=fi.files&&fi.files[0]; if(f) loadFile(f,mode); fi.remove(); });
+  document.body.append(fi); fi.click();
+}
+/* Lee la fecha EXIF (DateTimeOriginal) de un JPEG, si la tiene */
+async function exifDate(f){
+  try{
+    const buf=await f.slice(0,256*1024).arrayBuffer(); const v=new DataView(buf);
+    if (v.byteLength<4 || v.getUint16(0)!==0xFFD8) return null;
+    let o=2;
+    while (o+10<v.byteLength){
+      const mk=v.getUint16(o), len=v.getUint16(o+2);
+      if (mk===0xFFE1 && v.getUint32(o+4)===0x45786966){
+        const t=o+10, le=v.getUint16(t)===0x4949;
+        const g16=p=>v.getUint16(p,le), g32=p=>v.getUint32(p,le);
+        const ifd=off=>{ const n=g16(t+off), tags={}; for (let i=0;i<n;i++){ const e=t+off+2+i*12; if (e+12>v.byteLength) break; tags[g16(e)]={count:g32(e+4),val:e+8}; } return tags; };
+        const ascii=tg=>{ const p=tg.count>4? t+g32(tg.val) : tg.val; let s=''; for (let i=0;i<tg.count-1 && p+i<v.byteLength;i++) s+=String.fromCharCode(v.getUint8(p+i)); return s; };
+        const i0=ifd(g32(t+4)); let ds=null;
+        if (i0[0x8769]){ const ex=ifd(g32(i0[0x8769].val)); if (ex[0x9003]) ds=ascii(ex[0x9003]); }
+        if (!ds && i0[0x0132]) ds=ascii(i0[0x0132]);
+        const m=ds && ds.match(/(\d{4}):(\d{2}):(\d{2}) (\d{2}):(\d{2}):(\d{2})/); if (!m) return null;
+        return new Date(+m[1],m[2]-1,+m[3],+m[4],+m[5],+m[6]).getTime();
+      }
+      if ((mk&0xFF00)!==0xFF00 || mk===0xFFDA) break;
+      o+=2+len;
+    }
+  }catch(_){}
+  return null;
+}
+async function photoAgeMin(f){
+  const ages=[]; const ex=await exifDate(f);
+  if (ex) ages.push((Date.now()-ex)/60000);
+  if (f.lastModified) ages.push((Date.now()-f.lastModified)/60000);
+  return ages.length? Math.max(...ages) : null;
+}
+async function loadFile(f, mode){
+  const age=await photoAgeMin(f); const fresh = age==null ? null : age<=15;
+  if (fresh===false && !galeriaOK()){
+    const mins=Math.round(age); const txt = mins<120? `${mins} minutos` : mins<2880? `${Math.round(mins/60)} horas` : `${Math.round(mins/1440)} días`;
+    return ask('Esa foto no es de ahora 🤨', `Parece de hace ${txt}. En los Talibanes la foto se hace en el momento.`, '📷 Hacer foto').then(ok=>{ if(ok) pickFile('env'); });
+  }
+  E.live = mode!=='gal' && fresh!==false;
+  const url=URL.createObjectURL(f); const im=new Image();
+  im.onload=()=>{
+    const max=1280; let w=im.naturalWidth, hh=im.naturalHeight; const s=Math.min(1,max/Math.max(w,hh)); w=Math.round(w*s); hh=Math.round(hh*s);
+    const c=document.createElement('canvas'); c.width=w; c.height=hh; c.getContext('2d').drawImage(im,0,0,w,hh);
+    URL.revokeObjectURL(url);
+    E.img=c; E.W=w; E.H=hh; E.objs=[]; E.strokes=[]; E.sel=-1; E.filter='none'; E.hist=[];
+    applyFilter(); pushHist(); renderEditor();
+  };
+  im.onerror=()=>{ toast('No se pudo abrir esa imagen'); URL.revokeObjectURL(url); };
+  im.src=url;
+}
+function filterPixels(d, name){
+  if (name==='none') return;
+  const n=d.length;
+  for (let i=0;i<n;i+=4){
+    let r=d[i],g=d[i+1],b=d[i+2]; const l=0.299*r+0.587*g+0.114*b;
+    switch(name){
+      case 'bn': r=g=b=l; break;
+      case 'noir': { const v=(l-128)*1.6+118; r=g=b=v; break; }
+      case 'sepia': { const nr=r*.393+g*.769+b*.189, ng=r*.349+g*.686+b*.168, nb=r*.272+g*.534+b*.131; r=nr; g=ng; b=nb; break; }
+      case 'vintage': { r=l+(r-l)*.55; g=l+(g-l)*.55; b=l+(b-l)*.55; r=r*.85+45; g=g*.85+30; b=b*.7+35; break; }
+      case 'pop': { r=l+(r-l)*1.7; g=l+(g-l)*1.7; b=l+(b-l)*1.7; r=(r-128)*1.15+128; g=(g-128)*1.15+128; b=(b-128)*1.15+128; break; }
+      case 'frio': r=r*.88; g=g*.98+6; b=b*1.08+28; break;
+      case 'calido': r=r*1.06+24; g=g*1.01+10; b=b*.82; break;
+      case 'rosa': r=r*.95+45; g=g*.85+10; b=b*.95+40; break;
+      case 'acido': { const nr=255-b, ng=g*1.2, nb=255-r; r=l+(nr-l)*1.4; g=l+(ng-l)*1.4; b=l+(nb-l)*1.4; break; }
+    }
+    d[i]=r; d[i+1]=g; d[i+2]=b;
+  }
+}
+function vignette(ctx,w,hh,a){ const g=ctx.createRadialGradient(w/2,hh/2,Math.min(w,hh)*.35,w/2,hh/2,Math.max(w,hh)*.75); g.addColorStop(0,'rgba(0,0,0,0)'); g.addColorStop(1,'rgba(0,0,0,'+a+')'); ctx.fillStyle=g; ctx.fillRect(0,0,w,hh); }
+function filtered(src, w, hh, name){
+  const c=document.createElement('canvas'); c.width=w; c.height=hh; const x=c.getContext('2d'); x.drawImage(src,0,0,w,hh);
+  if (name!=='none'){ const id=x.getImageData(0,0,w,hh); filterPixels(id.data,name); x.putImageData(id,0,0); }
+  if (name==='vintage'||name==='noir') vignette(x,w,hh,name==='noir'?.6:.45);
+  return c;
+}
+function applyFilter(){ E.base = filtered(E.img, E.W, E.H, E.filter); }
+function pushHist(){ E.hist.push(JSON.stringify({o:E.objs,s:E.strokes,f:E.filter,fr:E.frame})); if (E.hist.length>40) E.hist.shift(); }
+function undo(){
+  if (E.hist.length<2) return toast('Nada que deshacer');
+  E.hist.pop(); const st=JSON.parse(E.hist[E.hist.length-1]);
+  const fchg = st.f!==E.filter; E.objs=st.o; E.strokes=st.s; E.filter=st.f; E.frame=st.fr; E.sel=-1;
+  if (fchg) applyFilter(); renderEditor();
+}
+const emojiFont = s => `${s}px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif`;
+const txtFont = o => `${o.font==='Inter'?'800 ':''}${o.s}px "${o.font}", sans-serif`;
+function objBox(ctx,o){
+  if (o.t==='e') return {w:o.s*1.25,h:o.s*1.25};
+  ctx.save(); ctx.font=txtFont(o); const lines=o.text.split('\n'); let w=0; for (const l of lines) w=Math.max(w,ctx.measureText(l).width); ctx.restore();
+  return {w:w+o.s*.4, h:lines.length*o.s*1.2+o.s*.2};
+}
+function drawObj(ctx,o){
+  ctx.save(); ctx.translate(o.x,o.y); ctx.rotate(o.r||0); ctx.textAlign='center'; ctx.textBaseline='middle';
+  if (o.t==='e'){ ctx.font=emojiFont(o.s); ctx.fillText(o.text,0,o.s*.06); }
+  else {
+    ctx.font=txtFont(o); const lines=o.text.split('\n'); const lh=o.s*1.2; const y0=-(lines.length-1)*lh/2;
+    lines.forEach((l,i)=>{
+      if (o.outline){ ctx.lineJoin='round'; ctx.lineWidth=Math.max(3,o.s*.16); ctx.strokeStyle=(o.color==='#111111')?'#ffffff':'#111111'; ctx.strokeText(l,0,y0+i*lh); }
+      ctx.fillStyle=o.color; ctx.fillText(l,0,y0+i*lh);
+    });
+  }
+  ctx.restore();
+}
+function drawStroke(ctx,s){
+  if (!s.p.length) return; ctx.save(); ctx.strokeStyle=s.c; ctx.fillStyle=s.c; ctx.lineWidth=s.w; ctx.lineCap='round'; ctx.lineJoin='round';
+  if (s.p.length===1){ ctx.beginPath(); ctx.arc(s.p[0][0],s.p[0][1],s.w/2,0,Math.PI*2); ctx.fill(); }
+  else { ctx.beginPath(); ctx.moveTo(s.p[0][0],s.p[0][1]); for (let i=1;i<s.p.length-1;i++){ const mx=(s.p[i][0]+s.p[i+1][0])/2, my=(s.p[i][1]+s.p[i+1][1])/2; ctx.quadraticCurveTo(s.p[i][0],s.p[i][1],mx,my); } const L=s.p[s.p.length-1]; ctx.lineTo(L[0],L[1]); ctx.stroke(); }
+  ctx.restore();
+}
+function drawFrame(ctx,w,hh,name){
+  const d = new Date(); const ds = d.toLocaleDateString('es-ES',{day:'2-digit',month:'2-digit',year:'numeric'});
+  const u=Math.min(w,hh);
+  ctx.save();
+  if (name==='polaroid'){
+    const b=u*.045, bb=u*.16; ctx.fillStyle='#f7f5ef'; ctx.beginPath(); ctx.rect(0,0,w,hh); ctx.rect(b,b,w-2*b,hh-b-bb); ctx.fill('evenodd');
+    ctx.fillStyle='#222'; ctx.font=`${u*.055}px "Permanent Marker", cursive`; ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText('Talibanes · '+ds, w/2, hh-bb/2);
+  } else if (name==='banner'){
+    const bh=u*.13; ctx.fillStyle='#c6ff3d'; ctx.fillRect(0,0,w,bh); ctx.fillStyle='#ff3da5'; ctx.fillRect(0,bh,w,u*.012);
+    ctx.fillStyle='#111'; ctx.textBaseline='middle'; ctx.font=`${bh*.72}px Bangers, cursive`; ctx.textAlign='left'; ctx.fillText('TALIBANES', u*.04, bh*.54);
+    ctx.textAlign='right'; ctx.font=`800 ${bh*.3}px Inter, sans-serif`; ctx.fillText(ds, w-u*.04, bh*.54);
+  } else if (name==='sello'){
+    const R=u*.15; ctx.translate(w-R*1.25, hh-R*1.25); ctx.rotate(-.25); ctx.globalAlpha=.85; ctx.strokeStyle='#e0262f'; ctx.fillStyle='#e0262f';
+    ctx.lineWidth=R*.08; ctx.beginPath(); ctx.arc(0,0,R,0,Math.PI*2); ctx.stroke(); ctx.lineWidth=R*.03; ctx.beginPath(); ctx.arc(0,0,R*.82,0,Math.PI*2); ctx.stroke();
+    ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.font=`${R*.42}px Bangers, cursive`; ctx.fillText('TALIBANES',0,-R*.12);
+    ctx.font=`800 ${R*.18}px Inter, sans-serif`; ctx.fillText(ds,0,R*.3); ctx.fillText('★ CUMPLIDO ★',0,R*.55);
+  } else if (name==='neon'){
+    const m=u*.03; ctx.lineWidth=u*.012; ctx.shadowBlur=u*.04;
+    ctx.strokeStyle='#ff3da5'; ctx.shadowColor='#ff3da5'; ctx.strokeRect(m,m,w-2*m,hh-2*m);
+    ctx.strokeStyle='#c6ff3d'; ctx.shadowColor='#c6ff3d'; ctx.strokeRect(m*1.9,m*1.9,w-3.8*m,hh-3.8*m);
+  } else if (name==='cine'){
+    const bh=u*.09; ctx.fillStyle='#000'; ctx.fillRect(0,0,w,bh); ctx.fillRect(0,hh-bh,w,bh); ctx.fillStyle='#ddd';
+    const hw=bh*.35, gap=hw*1.6; for (let x=gap/2; x<w; x+=gap){ ctx.fillRect(x,bh*.32,hw,bh*.36); ctx.fillRect(x,hh-bh*.68,hw,bh*.36); }
+  }
+  ctx.restore();
+}
+function compose(ctx, sel){
+  ctx.clearRect(0,0,E.W,E.H); ctx.drawImage(E.base,0,0);
+  for (const s of E.strokes) drawStroke(ctx,s);
+  for (const o of E.objs) drawObj(ctx,o);
+  drawFrame(ctx,E.W,E.H,E.frame);
+  if (sel>=0 && E.objs[sel]){
+    const o=E.objs[sel]; const b=objBox(ctx,o); ctx.save(); ctx.translate(o.x,o.y); ctx.rotate(o.r||0);
+    ctx.setLineDash([12,8]); ctx.lineWidth=Math.max(3,E.W/300); ctx.strokeStyle='#c6ff3d'; ctx.strokeRect(-b.w/2,-b.h/2,b.w,b.h); ctx.restore();
+  }
+}
+function redraw(){ if (E.cv && E.base) compose(E.ctx, E.sel); }
+function hit(p){
+  for (let i=E.objs.length-1;i>=0;i--){ const o=E.objs[i]; const b=objBox(E.ctx,o); const dx=p.x-o.x, dy=p.y-o.y, c=Math.cos(-(o.r||0)), s=Math.sin(-(o.r||0));
+    const lx=dx*c-dy*s, ly=dx*s+dy*c; const pad=E.W*.02; if (Math.abs(lx)<b.w/2+pad && Math.abs(ly)<b.h/2+pad) return i; }
+  return -1;
+}
+function toC(e){ const r=E.cv.getBoundingClientRect(); return {x:(e.clientX-r.left)*E.W/r.width, y:(e.clientY-r.top)*E.H/r.height}; }
+const dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y), ang=(a,b)=>Math.atan2(b.y-a.y,b.x-a.x);
+function bindCanvas(cv){
+  cv.addEventListener('pointerdown',e=>{
+    e.preventDefault(); try{cv.setPointerCapture(e.pointerId);}catch(_){}
+    const p=toC(e); E.ptrs.set(e.pointerId,p);
+    if (E.mode==='draw'){ if (E.ptrs.size===1){ E.cur={c:E.brush.color,w:E.brush.size*E.W/700,p:[[p.x,p.y]]}; E.strokes.push(E.cur); redraw(); } return; }
+    if (E.ptrs.size===1){ const i=hit(p); E.sel=i; E.moved=false; if (i>=0){ const o=E.objs[i]; E.drag={dx:p.x-o.x,dy:p.y-o.y}; E.objs.push(E.objs.splice(i,1)[0]); E.sel=E.objs.length-1; } else E.drag=null; renderSelBar(); }
+    else if (E.ptrs.size===2 && E.sel>=0){ const [a,b]=[...E.ptrs.values()]; const o=E.objs[E.sel]; E.pinch={d:dist(a,b),a:ang(a,b),s:o.s,r:o.r||0}; E.drag=null; }
+    redraw();
+  });
+  cv.addEventListener('pointermove',e=>{
+    if (!E.ptrs.has(e.pointerId)) return; const p=toC(e); E.ptrs.set(e.pointerId,p);
+    if (E.mode==='draw'){ if (E.cur){ E.cur.p.push([Math.round(p.x),Math.round(p.y)]); redraw(); } return; }
+    const o=E.objs[E.sel]; if (!o) return;
+    if (E.pinch && E.ptrs.size>=2){ const [a,b]=[...E.ptrs.values()]; o.s=Math.max(12,Math.min(E.W*1.5,E.pinch.s*dist(a,b)/E.pinch.d)); o.r=E.pinch.r+ang(a,b)-E.pinch.a; E.moved=true; redraw(); syncSel(); }
+    else if (E.drag){ o.x=p.x-E.drag.dx; o.y=p.y-E.drag.dy; E.moved=true; redraw(); }
+  });
+  const up=e=>{
+    if (!E.ptrs.has(e.pointerId)) return; E.ptrs.delete(e.pointerId);
+    if (E.mode==='draw'){ if (E.cur && E.ptrs.size===0){ E.cur=null; pushHist(); } return; }
+    if (E.ptrs.size<2) E.pinch=null;
+    if (E.ptrs.size===1 && E.sel>=0){ const p=[...E.ptrs.values()][0]; const o=E.objs[E.sel]; E.drag={dx:p.x-o.x,dy:p.y-o.y}; }
+    if (E.ptrs.size===0){ E.drag=null; if (E.moved){ pushHist(); E.moved=false; } }
+  };
+  cv.addEventListener('pointerup',up); cv.addEventListener('pointercancel',up);
+  cv.addEventListener('wheel',e=>{ const o=E.objs[E.sel]; if (!o) return; e.preventDefault(); o.s=Math.max(12,Math.min(E.W*1.5,o.s*(e.deltaY<0?1.08:.92))); redraw(); syncSel(); clearTimeout(E.wt); E.wt=setTimeout(pushHist,400); },{passive:false});
+}
+function addObj(o){ E.mode='move'; E.objs.push(o); E.sel=E.objs.length-1; pushHist(); redraw(); renderSelBar(); renderToolsOnly(); }
+function addSticker(em){ addObj({t:'e',text:em,x:E.W/2+(Math.random()-.5)*E.W*.2,y:E.H/2+(Math.random()-.5)*E.H*.2,s:Math.min(E.W,E.H)*.18,r:(Math.random()-.5)*.4}); }
+function addText(txt){ if (!txt.trim()) return; addObj({t:'t',text:txt.trim(),x:E.W/2,y:E.H*.18+Math.random()*E.H*.1,s:Math.min(E.W,E.H)*.11,r:0,font:E.txt.font,color:E.txt.color,outline:E.txt.outline}); }
+function renderSelBar(){
+  if (!E.ov) return; const old=E.ov.querySelector('.selbar'); if (old) old.remove();
+  const o=E.objs[E.sel]; if (!o || E.mode==='draw') return;
+  const size=h('input',{type:'range',min:'12',max:String(Math.round(E.W*1.2)),value:String(Math.round(o.s))});
+  const rot=h('input',{type:'range',min:'-180',max:'180',value:String(Math.round((o.r||0)*180/Math.PI))});
+  size.oninput=()=>{ o.s=+size.value; redraw(); }; rot.oninput=()=>{ o.r=+rot.value*Math.PI/180; redraw(); };
+  size.onchange=rot.onchange=pushHist;
+  const bar=h('div',{class:'selbar'}, '↔', size, '⟳', rot,
+    o.t==='t'? h('button',{class:'x',title:'Editar texto',text:'✏️',onclick:()=>{ const inp=h('textarea',{class:'inp',rows:'2'}); inp.value=o.text;
+      const ov=h('div',{class:'ov'}, h('div',{class:'modal'}, h('h3',{text:'Editar texto'}), inp, h('div',{class:'btns'}, h('button',{class:'btn ghost',text:'Cancelar',onclick:()=>ov.remove()}), h('button',{class:'btn',text:'OK',onclick:()=>{ if(inp.value.trim()){ o.text=inp.value.trim(); pushHist(); redraw(); } ov.remove(); }}))));
+      document.body.append(ov); }}) : null,
+    h('button',{class:'x',title:'Borrar',text:'🗑',onclick:()=>{ E.objs.splice(E.sel,1); E.sel=-1; pushHist(); redraw(); renderSelBar(); }}));
+  bar.sync=()=>{ size.value=String(Math.round(o.s)); rot.value=String(Math.round(((o.r||0)*180/Math.PI+540)%360-180)); };
+  E.ov.querySelector('.stage').append(bar);
+}
+function syncSel(){ const b=E.ov&&E.ov.querySelector('.selbar'); if (b&&b.sync) b.sync(); }
+
+function renderEditor(){
+  const ov=E.ov; if (!ov) return; ov.textContent='';
+  ov.append(h('div',{class:'eh'},
+    h('button',{class:'btn ghost sm',onclick:async()=>{ if (!E.img || await ask('¿Salir?','Perderás la edición.','Salir',true)) closeEditor(); }},'✕'),
+    h('div',{class:'t',text:'Foto del día'}),
+    E.img? h('button',{class:'btn ghost sm',onclick:undo},'↶') : null,
+    E.img? h('button',{class:'btn ghost sm',onclick:()=>pickFile('env')},'📷 Repetir') : null));
+  const stage=h('div',{class:'stage'}); ov.append(stage);
+  if (!E.img){
+    stage.append(h('div',{class:'pick'}, h('div',{style:'font-size:64px',text:'📸'}),
+      h('div',{style:'font-weight:800;color:var(--txt);font-size:18px',text:'Haz la foto ahora'}),
+      h('div',{style:'margin-top:4px',text:'Nada de fotos antiguas: se comprueba la hora de la foto.'}), h('br'),
+      h('div',{style:'display:flex;gap:10px;justify-content:center;flex-wrap:wrap'},
+        h('button',{class:'btn',onclick:()=>pickFile('env')},'📷 Cámara'),
+        h('button',{class:'btn ghost',onclick:()=>pickFile('user')},'🤳 Selfie')),
+      galeriaOK()? h('button',{class:'btn ghost sm',style:'margin-top:14px',onclick:()=>pickFile('gal')},'🖼️ Subir de la galería')
+               : h('div',{style:'font-size:12px;margin-top:16px',text:'En ordenador se abre el selector de archivos: solo vale una foto hecha hace menos de 15 min.'})));
+    E.cv=null; return;
+  }
+  E.cv=h('canvas'); E.cv.width=E.W; E.cv.height=E.H; E.ctx=E.cv.getContext('2d'); bindCanvas(E.cv); stage.append(E.cv);
+  redraw();
+  const tools=h('div',{class:'tools'}); ov.append(tools);
+  E.toolsEl=tools; renderToolsOnly();
+  const cap=h('input',{class:'inp',placeholder:'Escribe algo (opcional)…',maxlength:'200',value:E.cap});
+  cap.oninput=()=>{E.cap=cap.value;};
+  const pub=h('button',{class:'btn pink',onclick:()=>publish(pub)},'Publicar 🚀');
+  if (S.offline || !canAct()) { pub.disabled=true; pub.title='Sin conexión con la base de datos'; }
+  ov.append(h('div',{class:'foot'}, cap, pub));
+  renderSelBar();
+}
+function renderToolsOnly(){
+  const tools=E.toolsEl; if (!tools) return; tools.textContent='';
+  const tabs=[['filtros','🎨 Filtros'],['stickers','😎 Stickers'],['texto','🔤 Texto'],['dibujar','✏️ Dibujar'],['marcos','🖼️ Marcos']];
+  tools.append(h('div',{class:'ttabs'}, tabs.map(([k,l])=>h('button',{class:E.tool===k?'on':'',onclick:()=>{ E.tool=k; E.mode = k==='dibujar'?'draw':'move'; if(E.mode==='draw') E.sel=-1; redraw(); renderSelBar(); renderToolsOnly(); }},l))));
+  const p=h('div',{class:'tpanel'}); tools.append(p);
+  if (E.tool==='filtros'){
+    if (!E.thumbSrc || E.thumbFor!==E.img){ const s=72/Math.min(E.W,E.H); E.thumbSrc=filtered(E.img,Math.round(E.W*s),Math.round(E.H*s),'none'); E.thumbFor=E.img; E.thumbs={}; }
+    p.append(h('div',{class:'hscroll'}, FILTERS.map(([k,l])=>{
+      if (!E.thumbs[k]) E.thumbs[k]=filtered(E.thumbSrc,E.thumbSrc.width,E.thumbSrc.height,k).toDataURL('image/jpeg',.7);
+      return h('button',{class:'fbtn'+(E.filter===k?' on':''),onclick:()=>{ E.filter=k; applyFilter(); pushHist(); redraw(); renderToolsOnly(); }}, h('img',{src:E.thumbs[k],alt:''}), l);
+    })));
+  } else if (E.tool==='stickers'){
+    p.append(h('div',{class:'stk'}, STICKERS.map(s=>h('button',{onclick:()=>addSticker(s)},s))));
+    p.append(h('div',{class:'lbl',style:'margin-top:8px',text:'Toca un sticker para moverlo. Con dos dedos: zoom y girar.'}));
+  } else if (E.tool==='texto'){
+    const inp=h('input',{class:'inp',placeholder:'Escribe tu texto…',maxlength:'60'});
+    const add=()=>{ addText(inp.value); inp.value=''; };
+    inp.addEventListener('keydown',e=>{ if(e.key==='Enter') add(); });
+    p.append(h('div',{class:'addrow',style:'margin-top:0'}, inp, h('button',{class:'btn',onclick:add},'Añadir')));
+    p.append(h('div',{class:'fonts'}, FONTS.map(f=>h('button',{class:E.txt.font===f?'on':'',style:`font-family:"${f}"`,onclick:()=>{ E.txt.font=f; const o=E.objs[E.sel]; if(o&&o.t==='t'){o.font=f;pushHist();redraw();} renderToolsOnly(); }},f==='Inter'?'Normal':f))));
+    const ol=h('input',{type:'checkbox'}); ol.checked=E.txt.outline; ol.onchange=()=>{ E.txt.outline=ol.checked; const o=E.objs[E.sel]; if(o&&o.t==='t'){o.outline=ol.checked;pushHist();redraw();} };
+    p.append(h('div',{class:'sw'}, COLORS.map(c=>h('button',{class:E.txt.color===c?'on':'',style:`background:${c}`,onclick:()=>{ E.txt.color=c; const o=E.objs[E.sel]; if(o&&o.t==='t'){o.color=c;pushHist();redraw();} renderToolsOnly(); }})), h('label',{class:'toggle'}, ol, 'Borde')));
+    const t=today(); const n = S.uid ? Object.values(S.posts).filter(x=>x.uid===S.uid).length+ (S.posts[pid(t,S.uid)]?0:1) : 1;
+    p.append(h('div',{class:'quick'}, ['TALIBANES','BUENOS DÍAS','DÍA '+n, 'OTRO DÍA MÁS', 'SIN FILTRO', 'MODO BESTIA', new Date().toLocaleDateString('es-ES',{weekday:'long'}).toUpperCase()+' 💀'].map(q=>h('button',{onclick:()=>addText(q)},q))));
+  } else if (E.tool==='dibujar'){
+    p.append(h('div',{class:'lbl',text:'Dibuja con el dedo sobre la foto'}));
+    p.append(h('div',{class:'sw'}, COLORS.map(c=>h('button',{class:E.brush.color===c?'on':'',style:`background:${c}`,onclick:()=>{ E.brush.color=c; renderToolsOnly(); }}))));
+    const r=h('input',{type:'range',min:'4',max:'60',value:String(E.brush.size),style:'width:100%;accent-color:var(--lime);margin-top:10px'}); r.oninput=()=>{E.brush.size=+r.value;};
+    p.append(h('div',{class:'lbl',style:'margin-top:10px',text:'Grosor'}), r);
+    if (E.strokes.length) p.append(h('button',{class:'btn ghost sm',style:'margin-top:6px',onclick:()=>{ E.strokes=[]; pushHist(); redraw(); renderToolsOnly(); }},'Borrar dibujo'));
+  } else if (E.tool==='marcos'){
+    p.append(h('div',{class:'frames'}, FRAMES.map(([k,l])=>h('button',{class:E.frame===k?'on':'',onclick:()=>{ E.frame=k; pushHist(); redraw(); renderToolsOnly(); }},l))));
+  }
+}
+function exportData(){
+  let w=E.W, hh=E.H; const c=document.createElement('canvas'); c.width=w; c.height=hh; const x=c.getContext('2d');
+  const save=E.ctx; E.ctx=x; compose(x,-1); E.ctx=save;
+  let scale=Math.min(1,1080/Math.max(w,hh)), q=.86, out='';
+  for (let tries=0; tries<12; tries++){
+    const cw=Math.round(w*scale), ch=Math.round(hh*scale); const c2=document.createElement('canvas'); c2.width=cw; c2.height=ch; c2.getContext('2d').drawImage(c,0,0,cw,ch);
+    out=c2.toDataURL('image/jpeg',q);
+    if (out.length<235000) return out;
+    if (q>.55) q-=.1; else scale*=.85;
+  }
+  return out;
+}
+async function publish(btn){
+  if (!canAct()) return toast('No puedes publicar desde aquí');
+  E.sel=-1; redraw();
+  btn.disabled=true; btn.textContent='Subiendo…';
+  const data=exportData(); const t=today(); const id=pid(t,S.uid); const ts=Date.now();
+  S.imgCache.set(id+'@'+ts, data);
+  const ok = await W(()=>S.db.doc('imgs/'+id).set({data,uid:S.uid,date:t,ts}))
+          && await W(()=>S.db.doc('posts/'+id).set({uid:S.uid,date:t,caption:(E.cap||'').trim().slice(0,200),ts,r:{},live:!!E.live}));
+  if (ok){ closeEditor(); S.tab='hoy'; renderAll(); toast('¡Foto subida! Hoy te libras 😎'); }
+  else { btn.disabled=false; btn.textContent='Publicar 🚀'; }
+}
+
+/* ---------------- boot ---------------- */
+setInterval(()=>{ renderClock(); if (today()!==S.lastDay){ S.lastDay=today(); renderAll(); } }, 20000);
+renderAll();
+(async function boot(){
+  let db=null;
+  try {
+    if (!window.firebase || !window.FIREBASE_CONFIG) throw new Error('sin firebase');
+    if (!firebase.apps.length) firebase.initializeApp(window.FIREBASE_CONFIG);
+    await firebase.auth().signInAnonymously();
+    db = firebase.firestore();
+  } catch(e){ console.error(e); S.offline=true; renderAll(); return; }
+  S.db=db;
+  try { S.uid = localStorage.getItem('tb_mid') || null; } catch(_){}
+  const timer=setTimeout(()=>{ S.slow=true; renderBanners(); },10000);
+  const onErr = e => { clearTimeout(timer); console.error(e); if (e && e.code==='permission-denied') S.offline=true; renderAll(); };
+  db.collection('members').onSnapshot(snap=>{
+    const m={}; snap.docs.forEach(d=>{ m[d.id]=d.data(); }); S.members=m;
+    if (!snap.metadata.fromCache){ S.loaded.members=true; clearTimeout(timer); }
+    renderAll();
+    if (S.loaded.members && !iAmMember() && !S.joinShown){ S.joinShown=true; showJoin(); }
+  }, onErr);
+  db.collection('posts').onSnapshot(snap=>{
+    const p={}; snap.docs.forEach(d=>{ p[d.id]=d.data(); }); S.posts=p;
+    if (!snap.metadata.fromCache){ S.loaded.posts=true; clearTimeout(timer); S.slow=false; }
+    renderAll();
+  }, onErr);
+  db.collection('eventos').onSnapshot(snap=>{ const ev={}; snap.docs.forEach(d=>{ ev[d.id]=d.data(); }); S.eventos=ev; if (S.tab==='cnt'||S.tab==='rank') renderAll(); }, onErr);
+  db.collection('castigos').onSnapshot(snap=>{ const c={}; snap.docs.forEach(d=>{ c[d.id]=d.data(); }); S.castigos=c; renderAll(); }, onErr);
+  db.doc('config/main').onSnapshot(s=>{ S.config = s.exists ? s.data() : null; renderAll(); }, onErr);
+})();
+</script>
+</body>
+</html>
