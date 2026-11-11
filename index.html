@@ -371,6 +371,63 @@ body{font-size:15.5px;letter-spacing:.1px}
 .tag{font-family:var(--fd);font-weight:700;font-size:9.5px;letter-spacing:.3px}
 .ttabs button{font-weight:700}
 .fonts button{font-size:15px}
+
+/* ================= v5 ================= */
+.reto{display:flex;align-items:center;gap:12px;padding:12px 14px;margin:0 0 14px;border-radius:18px;border:1px dashed rgba(255,210,61,.45);background:linear-gradient(120deg,rgba(255,210,61,.10),rgba(255,61,165,.06))}
+.reto .re{font-size:26px;animation:bob 2.4s ease-in-out infinite}
+.reto small,.mvp small{display:block;font-family:var(--fd);font-size:9px;letter-spacing:.6px;color:var(--yellow);font-weight:700}
+.reto b{font-size:15px;font-weight:700}
+.mvp{margin-bottom:14px}
+.mvp small+b{display:block;font-size:16px}
+.mvp b+small{font-family:var(--fb);font-size:12px;color:var(--mut);letter-spacing:0;font-weight:400}
+.mvpimg{width:58px;height:58px;border-radius:14px;object-fit:cover;background:var(--card2);flex:none;border:2px solid var(--yellow)}
+.cprev{padding:0 16px 14px;cursor:pointer;font-size:14px}
+.cl1{margin-bottom:3px;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;word-break:break-word}
+.cmore{color:var(--mut);font-size:13px;margin-top:2px}
+.sheetov{align-items:flex-end;padding:0}
+.sheet{width:100%;max-width:640px;max-height:82vh;display:flex;flex-direction:column;background:linear-gradient(170deg,#20202a,#15151b);border:1px solid var(--edge);border-bottom:0;border-radius:26px 26px 0 0;padding:10px 16px calc(14px + env(safe-area-inset-bottom));animation:slideUp .34s cubic-bezier(.2,.8,.2,1) both}
+.sheet h3{font-family:var(--fd);font-weight:800;font-size:17px}
+.grab{width:42px;height:5px;border-radius:5px;background:rgba(255,255,255,.2);margin:0 auto 10px}
+.clist{flex:1;overflow-y:auto;min-height:120px;padding:4px 0}
+.cempty{color:var(--mut);text-align:center;padding:30px 0}
+.com{display:flex;gap:10px;align-items:flex-start;padding:8px 0;animation:rise .3s both}
+.com img{width:34px;height:34px;border-radius:50%;object-fit:cover;flex:none}
+.com .cb{flex:1;min-width:0;word-break:break-word}
+.ct{color:var(--mut);font-size:12px}
+.prof{text-align:center;position:relative}
+.pclose{position:absolute;top:14px;right:14px}
+.pav{width:104px;height:104px;border-radius:50%;object-fit:cover;padding:4px;background:conic-gradient(from 200deg,var(--lime),var(--cyan),var(--pink),var(--lime));animation:popIn .45s cubic-bezier(.2,.9,.3,1.4) both}
+.prof h3{margin-top:10px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px}
+.st{background:var(--glass);border:1px solid var(--edge);border-radius:14px;padding:9px 2px;min-width:0}
+.st b{display:block;font-family:var(--fd);font-weight:800;font-size:17px;color:var(--lime)}
+.st small{display:block;font-size:10.5px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 3px}
+.prof .lbl{text-align:left}
+.badges{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.bdg{background:var(--glass);border:1px solid var(--edge);border-radius:14px;padding:8px 2px;filter:grayscale(1);opacity:.38;transition:transform .14s}
+.bdg:active{transform:scale(.92)}
+.bdg.ok{filter:none;opacity:1;border-color:rgba(255,210,61,.5);background:linear-gradient(160deg,rgba(255,210,61,.16),rgba(255,61,165,.08))}
+.bdg span{display:block;font-size:24px}
+.bdg small{display:block;font-size:10px;font-weight:600;margin-top:2px;color:var(--txt)}
+.prof .thumbs .t{cursor:pointer}
+.cam{position:fixed;inset:0;z-index:95;background:#000;display:flex;align-items:center;justify-content:center;animation:fadeIn .2s both}
+.cam video{width:100%;height:100%;object-fit:contain;background:#000}
+.cam video.mir{transform:scaleX(-1)}
+.camtop{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;gap:8px;padding:calc(12px + env(safe-area-inset-top)) 14px 12px;background:linear-gradient(rgba(0,0,0,.6),transparent)}
+.camt{flex:1;text-align:center;font-family:var(--fd);font-weight:700;font-size:13px;color:#fff}
+.cambot{position:absolute;bottom:0;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:34px;padding:22px 0 calc(28px + env(safe-area-inset-bottom));background:linear-gradient(transparent,rgba(0,0,0,.7))}
+.shut{width:78px;height:78px;border-radius:50%;background:#fff;border:5px solid rgba(255,255,255,.35);background-clip:padding-box;box-shadow:0 0 0 3px #fff;transition:transform .12s}
+.shut:active{transform:scale(.88)}
+.shut:disabled{opacity:.6}
+.camb{width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.14);font-size:22px;border:1px solid rgba(255,255,255,.2);transition:transform .14s,background .2s}
+.camb:active{transform:scale(.9)}
+.camb.on{background:var(--lime)}
+.flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+.flash.go{animation:flash .3s ease-out}
+@keyframes flash{0%{opacity:.95}100%{opacity:0}}
+.count{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-weight:900;font-size:150px;color:#fff;text-shadow:0 6px 30px rgba(0,0,0,.6);pointer-events:none}
+.count.go{animation:cnt 1s ease-out both}
+@keyframes cnt{0%{transform:scale(1.6);opacity:0}25%{transform:scale(1);opacity:1}100%{transform:scale(.8);opacity:0}}
 </style>
 </head>
 <body>
@@ -498,7 +555,7 @@ const FRAMES = [['none','Sin marco'],['polaroid','Polaroid'],['banner','Banda TA
 const S = {
   db:null, user:null, uid:null, owner:false, readOnly:false, offline:false,
   loaded:{members:false,posts:false}, slow:false,
-  members:{}, posts:{}, castigos:{}, config:null, profiles:{}, eventos:{},
+  members:{}, posts:{}, castigos:{}, config:null, profiles:{}, eventos:{}, coms:{},
   cntSel:'cubatas', cntRange:'mes', cntFor:null,
   imgCache:new Map(), tab:'hoy', joinShown:false, lastDay:today()
 };
@@ -511,8 +568,7 @@ function initialsAvatar(uid){
   return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
 }
 function avatarOf(uid){
-  const p=S.profiles[uid];
-  if (p && p.name && p.avatarUrl) return p.avatarUrl;
+  const mm=S.members[uid]; if (mm && mm.av) return mm.av;
   return initialsAvatar(uid);
 }
 function castigoList(){ const l = S.config && Array.isArray(S.config.castigos) ? S.config.castigos : null; return (l && l.length) ? l : DEFAULT_CASTIGOS; }
@@ -581,7 +637,7 @@ function renderClock(){
 }
 function renderMe(){
   const im=$('meav');
-  if (iAmMember()){ im.src=avatarOf(S.uid); im.style.display=''; im.onclick=editApodo; im.title='Cambiar apodo'; }
+  if (iAmMember()){ im.src=avatarOf(S.uid); im.style.display=''; im.onclick=()=>openProfile(S.uid); im.title='Mi perfil'; }
   else im.style.display='none';
 }
 function renderBanners(){
@@ -624,15 +680,15 @@ function reactBar(id, post){
     ev.stopPropagation();
     if (!canAct()) return toast('Únete al grupo para reaccionar');
     const nv = mine===e ? '' : e;
-    if (nv){ const b=ev.currentTarget.getBoundingClientRect(); floatEmoji(e, b.left+b.width/2, b.top); }
+    if (nv){ buzz(8); const b=ev.currentTarget.getBoundingClientRect(); floatEmoji(e, b.left+b.width/2, b.top); }
     await W(()=>S.db.doc('posts/'+id).update({['r.'+S.uid]:nv}));
   }}, e, counts[e]? h('small',{text:counts[e]}) : null)));
 }
 function postCard(id, post){
   const del = (S.uid===post.uid || S.owner) && canAct();
   return h('div',{class:'post'},
-    h('div',{class:'hd'}, h('img',{src:avatarOf(post.uid),alt:''}),
-      h('div',null, h('div',{class:'nm',text:nameOf(post.uid)}), h('div',{class:'tm',text:fmtDay(post.date)+' · '+fmtTime(post.ts)+(post.live===true?' · 📸 en directo':post.live===false?' · 🖼️ de galería':'')})),
+    h('div',{class:'hd'}, h('img',{src:avatarOf(post.uid),alt:'',style:'cursor:pointer',onclick:()=>openProfile(post.uid)}),
+      h('div',{style:'cursor:pointer',onclick:()=>openProfile(post.uid)}, h('div',{class:'nm',text:nameOf(post.uid)}), h('div',{class:'tm',text:fmtDay(post.date)+' · '+fmtTime(post.ts)+(post.live===true?' · 📸 en directo':post.live===false?' · 🖼️ de galería':'')})),
       h('div',{class:'sp'}),
       del? h('button',{class:'x',title:'Borrar',text:'🗑',onclick:()=>deletePost(id,post)}) : null),
     (()=>{ const im=imgFor(id,post); let last=0, t=null;
@@ -642,7 +698,8 @@ function postCard(id, post){
         else { last=now; t=setTimeout(()=>lightbox(id,post),320); } };
       return h('div',{class:'phw'}, im); })(),
     post.caption? h('div',{class:'cap',text:post.caption}) : null,
-    reactBar(id,post));
+    reactBar(id,post),
+    comPreview(id,post));
 }
 async function deletePost(id, post){
   if (!await ask('¿Borrar foto?', `Se borrará la foto de ${nameOf(post.uid)} del ${fmtShort(post.date)}. Si es de hoy, tendrá que subir otra.`, 'Borrar', true)) return;
@@ -675,10 +732,14 @@ function renderHoy(m){
     m.append(h('div',{class:'hero warn'}, h('h2',{text:'📸 Te falta la foto'}), h('p',null,'Te quedan ', h('span',{class:minsLeft()<180?'urg':'tl',text:untilMidnight()}), ' para subirla o te cae castigo.'),
       h('button',{class:'btn big pink',onclick:openEditor},'Subir foto del día')));
   }
+  if (!S.offline) m.append(h('div',{class:'reto'}, h('div',{class:'re',text:'🎯'}), h('div',{class:'mid'}, h('small',{text:'RETO DE HOY (opcional)'}), h('b',{text:retoHoy()}))));
+  const mv=mvp(addDays(t,-1));
+  if (mv) m.append(h('div',{class:'row mvp',style:'cursor:pointer',onclick:()=>lightbox(mv.id,mv.p)}, (()=>{ const im=imgFor(mv.id,mv.p,'mvpimg'); return im; })(),
+    h('div',{class:'mid'}, h('small',{text:'👑 FOTO DE AYER'}), h('b',{text:nameOf(mv.p.uid)}), h('small',{text:mv.n+' reacci'+(mv.n===1?'ón':'ones')})), h('div',{style:'font-size:26px',text:'🏆'})));
   if (ids.length){
     const done = ids.filter(u=>S.posts[pid(t,u)]);
     m.append(h('div',{class:'prog'}, h('span',{text:`${done.length}/${ids.length} han cumplido`}), h('div',{class:'bar'}, barI(ids.length?done.length/ids.length*100:0))));
-    m.append(h('div',{class:'chips'}, ids.map(u=>{ const ok=!!S.posts[pid(t,u)]; return h('div',{class:'chip '+(ok?'done':'miss')}, h('img',{class:'av',src:avatarOf(u),alt:''}), h('span',{text:(ok?'✅ ':'⏳ ')+nameOf(u)})); })));
+    m.append(h('div',{class:'chips'}, ids.map(u=>{ const ok=!!S.posts[pid(t,u)]; return h('div',{class:'chip '+(ok?'done':'miss'),style:'cursor:pointer',onclick:()=>openProfile(u)}, h('img',{class:'av',src:avatarOf(u),alt:''}), h('span',{text:(ok?'✅ ':'⏳ ')+nameOf(u)})); })));
   }
   const today_posts = Object.entries(S.posts).filter(([,p])=>p.date===t).sort((a,b)=>(b[1].ts||0)-(a[1].ts||0));
   m.append(h('div',{class:'sec'},'Fotos de hoy', h('small',{text:fmtShort(t)})));
@@ -753,13 +814,13 @@ function renderRank(m){
   if (rows.length>=2){
     const top=rows.slice(0,3); const order=[top[1],top[0],top[2]].filter(Boolean);
     m.append(h('div',{class:'podium'+(S.anim?' grow':'')}, order.map(r=>{ const pos=top.indexOf(r);
-      return h('div',{class:'pod p'+(pos+1)}, h('div',{class:'crown',text:pos===0?'👑':''}), h('img',{src:avatarOf(r.u),alt:''}), h('div',{class:'nm',text:nameOf(r.u)}),
+      return h('div',{class:'pod p'+(pos+1),style:'cursor:pointer',onclick:()=>openProfile(r.u)}, h('div',{class:'crown',text:pos===0?'👑':''}), h('img',{src:avatarOf(r.u),alt:''}), h('div',{class:'nm',text:nameOf(r.u)}),
         h('div',{class:'blk',style:`height:${[118,86,62][pos]}px`}, h('span',{text:pos+1}), h('small',{text:'🔥 '+r.racha}))); })));
   }
   m.append(h('table',{class:'rank'},
     h('tr',null, h('th',{style:'text-align:left'},'Talibán'), h('th',null,'🔥 Racha'), h('th',null,'📸'), h('th',null,'💀'), h('th',null,'⛓️')),
     rows.map((r,i)=> h('tr',null,
-      h('td',{class:'n'}, h('span',{text:i===0?'👑':(i+1)+'.'}), h('img',{src:avatarOf(r.u),alt:''}), h('span',{text:nameOf(r.u)})),
+      h('td',{class:'n',style:'cursor:pointer',onclick:()=>openProfile(r.u)}, h('span',{text:i===0?'👑':(i+1)+'.'}), h('img',{src:avatarOf(r.u),alt:''}), h('span',{text:nameOf(r.u)})),
       h('td',null, h('b',{text:r.racha}), h('div',{style:'font-size:10px;color:var(--mut)',text:'máx '+r.best})),
       h('td',{text:r.fotos}), h('td',{text:r.fallos}), h('td',{text:r.pend})))));
   m.append(h('p',{style:'font-size:12px;color:var(--mut);margin-top:8px'},'📸 fotos subidas · 💀 días sin foto · ⛓️ castigos pendientes. Los fallos cuentan desde el día siguiente a unirse.'));
@@ -812,7 +873,7 @@ function renderCnt(m){
       btn.disabled=true;
       const ok=await W(()=>S.db.collection('eventos').add({uid:who,tipo:c.k,date:d,ts:Date.now(),nota:(note.value||'').trim().slice(0,100),by:S.uid}));
       btn.disabled=false;
-      if (ok){ burst(c.e); setTimeout(()=>{ const cc=document.querySelector('.ccard.on'); if(cc&&!RM) cc.classList.add('bump'); },300); S.cntNote=''; note.value=''; toast(`+1 ${c.e} para ${who===S.uid?'ti':nameOf(who)}`); }
+      if (ok){ buzz(15); burst(c.e); setTimeout(()=>{ const cc=document.querySelector('.ccard.on'); if(cc&&!RM) cc.classList.add('bump'); },300); S.cntNote=''; note.value=''; toast(`+1 ${c.e} para ${who===S.uid?'ti':nameOf(who)}`); }
     };
     m.append(h('div',{class:'day',style:'margin-top:12px'},
       h('div',{class:'lbl',text:'¿Para quién?'}), sel,
@@ -851,6 +912,132 @@ function newCounter(){
         const k='c'+Date.now().toString(36); const list=[...contadores(), {k, e:em.value.trim()||'⭐', n}];
         if (await W(()=>S.db.doc('config/main').set({...(S.config||{}), contadores:list}))){ S.cntSel=k; ov.remove(); renderAll(); } }}))));
   document.body.append(ov); setTimeout(()=>nm.focus(),50);
+}
+
+/* ---------------- v5: retos, MVP, comentarios, perfiles, cámara ---------------- */
+function buzz(p){ try{ if (navigator.vibrate) navigator.vibrate(p); }catch(_){} }
+const RETOS=['Foto con algo verde','Selfie con la cara más seria posible','Lo que estás comiendo ahora mismo','Foto desde el suelo','Tu mejor cara de lunes','Algo que te haga gracia','Foto con un animal (o un peluche)','Tu vista ahora mismo','Selfie en un espejo','Foto con alguien de fondo que no se entere','Tus zapatillas de hoy','Algo de color rosa','Foto imitando un cuadro famoso','El sitio más raro donde estés hoy','Selfie con gafas de sol','Lo último que te has bebido','Foto con el pulgar arriba y cara de pena','Tu escritorio o tu cama tal cual está','Algo redondo','Foto en blanco y negro (usa el filtro)','Selfie con la boca llena','Una señal o cartel gracioso','Foto con tu comida favorita','Pose de superhéroe','Algo que huela mal','Selfie haciendo el pino (o intentándolo)','El cielo ahora mismo','Foto con un amigo','Tu cara al despertarte','Algo que te recuerde a un Talibán'];
+function retoHoy(){ return RETOS[hash('reto'+today())%RETOS.length]; }
+function rcount(p){ return Object.values(p.r||{}).filter(Boolean).length; }
+function mvp(date){ let best=null; for (const [id,p] of Object.entries(S.posts)) if (p.date===date){ const n=rcount(p); if (n>0 && (!best || n>best.n || (n===best.n && (p.ts||0)<(best.p.ts||0)))) best={id,p,n}; } return best; }
+function mvpCount(uid){ const t=today(); const dates=new Set(Object.values(S.posts).filter(p=>p.date<t).map(p=>p.date)); let n=0; for (const d of dates){ const b=mvp(d); if (b && b.p.uid===uid) n++; } return n; }
+function ago(ts){ const m=Math.max(0,Math.floor((Date.now()-(ts||0))/60000)); if (m<1) return 'ahora'; if (m<60) return m+' min'; if (m<1440) return Math.floor(m/60)+' h'; return Math.floor(m/1440)+' d'; }
+function comsOf(id){ return Object.entries(S.coms).filter(([,c])=>c && c.pid===id).map(([k,c])=>({id:k,...c})).sort((a,b)=>(a.ts||0)-(b.ts||0)); }
+function comPreview(id,post){
+  const cs=comsOf(id);
+  return h('div',{class:'cprev',onclick:()=>openComs(id,post)},
+    cs.slice(-2).map(c=>h('div',{class:'cl1'}, h('b',{text:nameOf(c.uid)+' '}), c.txt)),
+    h('div',{class:'cmore',text: cs.length>2?`Ver los ${cs.length} comentarios` : cs.length? 'Añadir un comentario…' : '💬 Comentar…'}));
+}
+function openComs(id,post){
+  const list=h('div',{class:'clist'}); const inp=h('input',{class:'inp',placeholder:'Escribe un comentario…',maxlength:'200'});
+  const draw=()=>{ list.textContent=''; const cs=comsOf(id);
+    if (!cs.length) list.append(h('div',{class:'cempty',text:'Sé el primero en comentar 👀'}));
+    for (const c of cs) list.append(h('div',{class:'com'}, h('img',{src:avatarOf(c.uid),alt:''}),
+      h('div',{class:'cb'}, h('b',{text:nameOf(c.uid)}), h('span',{class:'ct',text:' · '+ago(c.ts)}), h('div',{text:c.txt})),
+      (canAct()&&(c.uid===S.uid||S.owner))? h('button',{class:'x',text:'✕',title:'Borrar',onclick:()=>W(()=>S.db.doc('comentarios/'+c.id).delete())}) : null));
+    list.scrollTop=list.scrollHeight; };
+  const send=async()=>{ const v=inp.value.trim(); if(!v) return; if(!canAct()||!iAmMember()) return toast('Únete al grupo para comentar');
+    inp.value=''; buzz(10); await W(()=>S.db.collection('comentarios').add({pid:id,uid:S.uid,txt:v.slice(0,200),ts:Date.now()})); };
+  inp.addEventListener('keydown',e=>{ if(e.key==='Enter') send(); });
+  const close=()=>{ ov.remove(); S.comDraw=null; };
+  const ov=h('div',{class:'ov sheetov',onclick:e=>{ if(e.target===ov) close(); }}, h('div',{class:'sheet'}, h('div',{class:'grab'}),
+    h('div',{style:'display:flex;align-items:center;gap:8px'}, h('h3',{style:'flex:1;margin:0',text:'Comentarios'}), h('button',{class:'x',text:'✕',onclick:close})),
+    h('div',{class:'ct',style:'margin:2px 0 8px',text:'Foto de '+nameOf(post.uid)+' · '+fmtDay(post.date)}),
+    list, h('div',{class:'addrow'}, inp, h('button',{class:'btn',onclick:send},'Enviar'))));
+  document.body.append(ov); S.comDraw=draw; draw();
+}
+function insignias(uid){
+  const ps=Object.values(S.posts).filter(p=>p.uid===uid); const best=bestStreak(uid); const m=S.members[uid]||{};
+  const fallos=missedList().filter(x=>x.uid===uid).length; const evs=eventosList().filter(e=>e.uid===uid);
+  const dias=m.joined? Math.round((parseD(today())-parseD(m.joined))/86400000) : 0;
+  const hr=p=>new Date(p.ts||0).getHours(); const mv=mvpCount(uid);
+  return [
+    {e:'🔥',n:'Racha 3',d:'3 días seguidos subiendo foto',ok:best>=3},
+    {e:'⚡',n:'Racha 7',d:'Una semana entera sin fallar',ok:best>=7},
+    {e:'💎',n:'Racha 30',d:'Un mes sin fallar',ok:best>=30},
+    {e:'📸',n:'10 fotos',d:'10 fotos subidas',ok:ps.length>=10},
+    {e:'🎞️',n:'50 fotos',d:'50 fotos subidas',ok:ps.length>=50},
+    {e:'👑',n:'MVP'+(mv>1?' ×'+mv:''),d:'Foto con más reacciones de un día',ok:mv>=1},
+    {e:'😇',n:'Impecable',d:'Una semana en el grupo sin ningún fallo',ok:dias>=7&&fallos===0},
+    {e:'🌅',n:'Madrugador',d:'3 fotos antes de las 9:00',ok:ps.filter(p=>hr(p)<9&&hr(p)>=5).length>=3},
+    {e:'🦉',n:'Al límite',d:'3 fotos después de las 23:00',ok:ps.filter(p=>hr(p)>=23).length>=3},
+    {e:'🥃',n:'Barra libre',d:'10 cubatas apuntados',ok:evs.filter(e=>e.tipo==='cubatas').length>=10},
+    {e:'💋',n:'Casanova',d:'5 besos apuntados',ok:evs.filter(e=>e.tipo==='besos').length>=5},
+    {e:'🤡',n:'Vago',d:'3 días sin subir foto',ok:fallos>=3}
+  ];
+}
+function openProfile(uid){
+  const m=S.members[uid]; if(!m) return;
+  const me=uid===S.uid; const posts=Object.entries(S.posts).filter(([,p])=>p.uid===uid).sort((a,b)=>b[1].date.localeCompare(a[1].date));
+  const fallos=missedList().filter(x=>x.uid===uid).length; const evs=eventosList().filter(e=>e.uid===uid);
+  const stat=(v,l)=>h('div',{class:'st'}, h('b',{text:v}), h('small',{text:l}));
+  const ov=h('div',{class:'ov',onclick:e=>{ if(e.target===ov) ov.remove(); }});
+  ov.append(h('div',{class:'modal prof'},
+    h('button',{class:'x pclose',text:'✕',onclick:()=>ov.remove()}),
+    h('img',{class:'pav',src:avatarOf(uid),alt:''}),
+    h('h3',{text:nameOf(uid)}),
+    h('p',{text:'Talibán desde el '+fmtShort(m.joined||today())+((S.config&&S.config.admin===uid)?' · 👑 admin':'')}),
+    h('div',{class:'stats'}, stat(streak(uid),'🔥 racha'), stat(bestStreak(uid),'🏅 récord'), stat(posts.length,'📸 fotos'), stat(fallos,'💀 fallos')),
+    h('div',{class:'stats'}, contadores().slice(0,4).map(c=>stat(evs.filter(e=>e.tipo===c.k).length, c.e+' '+c.n))),
+    h('div',{class:'lbl',style:'margin-top:16px',text:'Insignias (toca una para ver cómo se consigue)'}),
+    h('div',{class:'badges'}, insignias(uid).map(b=>h('button',{class:'bdg'+(b.ok?' ok':''),onclick:()=>toast(b.e+' '+b.n+': '+b.d+(b.ok?' ✅':' 🔒'))}, h('span',{text:b.e}), h('small',{text:b.n})))),
+    posts.length? h('div',{class:'lbl',style:'margin-top:16px',text:'Fotos'}) : null,
+    posts.length? h('div',{class:'thumbs'}, posts.slice(0,24).map(([id,p])=>h('div',{class:'t',onclick:()=>lightbox(id,p)}, imgFor(id,p), h('div',{class:'who',text:fmtDay(p.date)})))) : null,
+    (me&&canAct())? h('div',{class:'btns'}, h('button',{class:'btn ghost',onclick:()=>pickAvatar(ov)},'📷 Foto de perfil'), h('button',{class:'btn ghost',onclick:()=>{ ov.remove(); editApodo(); }},'✏️ Editar')) : null));
+  document.body.append(ov);
+}
+function pickAvatar(ov){
+  const fi=h('input',{type:'file',accept:'image/*',style:'display:none'});
+  fi.addEventListener('change',()=>{ const f=fi.files&&fi.files[0]; fi.remove(); if(!f) return;
+    const url=URL.createObjectURL(f); const im=new Image();
+    im.onload=async()=>{ const s=Math.min(im.naturalWidth,im.naturalHeight); const c=document.createElement('canvas'); c.width=c.height=160;
+      c.getContext('2d').drawImage(im,(im.naturalWidth-s)/2,(im.naturalHeight-s)/2,s,s,0,0,160,160); URL.revokeObjectURL(url);
+      const data=c.toDataURL('image/jpeg',.8);
+      if (await W(()=>S.db.doc('members/'+S.uid).update({av:data}))){ S.members[S.uid]={...S.members[S.uid],av:data}; ov.remove(); renderAll(); openProfile(S.uid); toast('Foto de perfil cambiada 😎'); } };
+    im.onerror=()=>{ URL.revokeObjectURL(url); toast('No se pudo abrir esa imagen'); };
+    im.src=url; });
+  document.body.append(fi); fi.click();
+}
+async function shareImg(im,post){
+  try{
+    if (!im.src) return toast('La foto aún está cargando');
+    const b=await (await fetch(im.src)).blob(); const f=new File([b],'talibanes-'+post.date+'-'+nameOf(post.uid)+'.jpg',{type:'image/jpeg'});
+    if (navigator.canShare && navigator.canShare({files:[f]})){ await navigator.share({files:[f],title:'Talibanes'}); return; }
+    const u=URL.createObjectURL(b); const a=h('a',{href:u,download:f.name}); document.body.append(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(u),4000);
+  }catch(e){ if (!e || e.name!=='AbortError') toast('No se pudo compartir'); }
+}
+let CAM=null;
+function closeCamera(){ if (!CAM) return; try{ CAM.stream && CAM.stream.getTracks().forEach(t=>t.stop()); }catch(_){} clearTimeout(CAM.tm); CAM.ov.remove(); CAM=null; }
+function setEditorImage(c){ E.img=c; E.W=c.width; E.H=c.height; E.objs=[]; E.strokes=[]; E.sel=-1; E.filter='none'; E.hist=[]; applyFilter(); pushHist(); renderEditor(); }
+async function openCamera(facing){
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return pickFile(facing==='user'?'user':'env');
+  const keepTimer = CAM ? CAM.timer : false; closeCamera();
+  const video=h('video',{playsinline:true,autoplay:true}); video.muted=true;
+  const flash=h('div',{class:'flash'}); const count=h('div',{class:'count'});
+  const shut=h('button',{class:'shut',title:'Hacer foto'});
+  const tbtn=h('button',{class:'camb'+(keepTimer?' on':''),text:'⏱️',title:'Temporizador 3 s'});
+  const ov=h('div',{class:'cam'}, video, flash, count,
+    h('div',{class:'camtop'}, h('button',{class:'btn ghost sm',onclick:closeCamera},'✕'), h('div',{class:'camt',text:'📸 En directo'}), h('div',{style:'width:44px'})),
+    h('div',{class:'cambot'}, tbtn, shut, h('button',{class:'camb',text:'🔄',title:'Cambiar de cámara',onclick:()=>openCamera(CAM&&CAM.facing==='user'?'environment':'user')})));
+  document.body.append(ov); const me=CAM={ov,facing,stream:null,timer:keepTimer,tm:null};
+  tbtn.onclick=()=>{ me.timer=!me.timer; tbtn.classList.toggle('on',me.timer); toast(me.timer?'Temporizador: 3 segundos':'Temporizador quitado'); };
+  try{
+    const stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:facing},width:{ideal:1920},height:{ideal:1080}},audio:false});
+    if (CAM!==me){ stream.getTracks().forEach(t=>t.stop()); return; }
+    me.stream=stream; video.srcObject=stream; video.classList.toggle('mir',facing==='user'); await video.play().catch(()=>{});
+  }catch(e){ if (CAM===me) closeCamera(); toast('No se pudo abrir la cámara. Dale permiso o usa "la cámara del móvil".'); return; }
+  const snap=()=>{
+    if (CAM!==me) return; const vw=video.videoWidth, vh=video.videoHeight; if (!vw) return toast('La cámara aún no está lista');
+    const sc=Math.min(1,1280/Math.max(vw,vh)); const w=Math.round(vw*sc), hh=Math.round(vh*sc);
+    const c=document.createElement('canvas'); c.width=w; c.height=hh; const x=c.getContext('2d');
+    if (facing==='user'){ x.translate(w,0); x.scale(-1,1); } x.drawImage(video,0,0,w,hh);
+    flash.classList.add('go'); buzz(25); E.live=true;
+    setTimeout(()=>{ closeCamera(); setEditorImage(c); }, RM?0:160);
+  };
+  shut.onclick=()=>{ if (!me.timer) return snap(); let n=3; shut.disabled=true;
+    const tick=()=>{ if (CAM!==me) return; if (n===0){ count.textContent=''; shut.disabled=false; return snap(); } count.textContent=n; count.classList.remove('go'); void count.offsetWidth; count.classList.add('go'); buzz(10); n--; me.tm=setTimeout(tick,1000); };
+    tick(); };
 }
 
 /* ---------------- modals ---------------- */
@@ -922,7 +1109,7 @@ function lightbox(id, post){
     h('button',{class:'close',text:'✕',onclick:()=>ov.remove()}), im,
     h('div',{class:'info'}, h('div',{style:'font-weight:800'}, nameOf(post.uid), h('span',{style:'color:var(--mut);font-weight:400',text:' · '+fmtDay(post.date)+' '+fmtTime(post.ts)})),
       post.caption? h('div',{style:'margin-top:6px;white-space:pre-wrap',text:post.caption}) : null,
-      h('div',{style:'font-size:12px;color:var(--mut);margin-top:6px',text:'Mantén pulsada la foto para guardarla en el móvil.'})));
+      h('div',{class:'acts',style:'margin-top:10px'}, h('button',{class:'btn ghost sm',onclick:()=>shareImg(im,post)},'📤 Compartir / guardar'), h('button',{class:'btn ghost sm',onclick:()=>openComs(id,post)},'💬 Comentarios ('+comsOf(id).length+')'))));
   document.body.append(ov);
   if (im.dataset.key && !im.src) fetchImg(im);
 }
@@ -934,7 +1121,7 @@ function ruleta(date, uid){
   const final = list[Math.floor(Math.random()*list.length)];
   let i=0, delay=50; const start=Date.now();
   const step=()=>{
-    if (Date.now()-start > 2600){ slot.textContent=final; slot.classList.remove('spin'); slot.classList.add('win'); confetti(45);
+    if (Date.now()-start > 2600){ slot.textContent=final; slot.classList.remove('spin'); slot.classList.add('win'); confetti(45); buzz([40,60,120]);
       btns.append(h('button',{class:'btn ghost',text:'Cerrar',onclick:()=>ov.remove()}));
       W(()=>S.db.doc('castigos/'+pid(date,uid)).set({uid,date,castigo:final,estado:'pendiente',by:S.uid,ts:Date.now()})).then(ok=>{ if(ok) toast('Castigo asignado 😈'); });
       return; }
@@ -955,7 +1142,7 @@ function openEditor(){
   E.ov = h('div',{class:'ed'}); document.body.append(E.ov); document.body.style.overflow='hidden';
   renderEditor();
 }
-function closeEditor(){ if (E.ov) E.ov.remove(); E.ov=null; E.cv=null; document.body.style.overflow=''; }
+function closeEditor(){ closeCamera(); if (E.ov) E.ov.remove(); E.ov=null; E.cv=null; document.body.style.overflow=''; }
 function galeriaOK(){ return !!(S.config && S.config.galeria); }
 function pickFile(mode){
   if (typeof mode!=='string') mode='env';
@@ -1169,17 +1356,18 @@ function renderEditor(){
     h('button',{class:'btn ghost sm',onclick:async()=>{ if (!E.img || await ask('¿Salir?','Perderás la edición.','Salir',true)) closeEditor(); }},'✕'),
     h('div',{class:'t',text:'Foto del día'}),
     E.img? h('button',{class:'btn ghost sm',onclick:undo},'↶') : null,
-    E.img? h('button',{class:'btn ghost sm',onclick:()=>pickFile('env')},'📷 Repetir') : null));
+    E.img? h('button',{class:'btn ghost sm',onclick:()=>openCamera('environment')},'📷 Repetir') : null));
   const stage=h('div',{class:'stage'}); ov.append(stage);
   if (!E.img){
     stage.append(h('div',{class:'pick'}, h('div',{style:'font-size:64px',text:'📸'}),
       h('div',{style:'font-weight:800;color:var(--txt);font-size:18px',text:'Haz la foto ahora'}),
       h('div',{style:'margin-top:4px',text:'Nada de fotos antiguas: se comprueba la hora de la foto.'}), h('br'),
       h('div',{style:'display:flex;gap:10px;justify-content:center;flex-wrap:wrap'},
-        h('button',{class:'btn',onclick:()=>pickFile('env')},'📷 Cámara'),
-        h('button',{class:'btn ghost',onclick:()=>pickFile('user')},'🤳 Selfie')),
+        h('button',{class:'btn',onclick:()=>openCamera('environment')},'📷 Cámara'),
+        h('button',{class:'btn ghost',onclick:()=>openCamera('user')},'🤳 Selfie')),
+      h('div',{style:'margin-top:12px'}, h('button',{class:'btn ghost sm',onclick:()=>pickFile('env')},'¿No va? Usar la cámara del móvil')),
       galeriaOK()? h('button',{class:'btn ghost sm',style:'margin-top:14px',onclick:()=>pickFile('gal')},'🖼️ Subir de la galería')
-               : h('div',{style:'font-size:12px;margin-top:16px',text:'En ordenador se abre el selector de archivos: solo vale una foto hecha hace menos de 15 min.'})));
+               : h('div',{style:'font-size:12px;margin-top:16px',text:'La cámara se abre dentro de la app. También funciona con la webcam del ordenador.'})));
     E.cv=null; return;
   }
   E.cv=h('canvas'); E.cv.width=E.W; E.cv.height=E.H; E.ctx=E.cv.getContext('2d'); bindCanvas(E.cv); stage.append(E.cv);
@@ -1247,7 +1435,7 @@ async function publish(btn){
   S.imgCache.set(id+'@'+ts, data);
   const ok = await W(()=>S.db.doc('imgs/'+id).set({data,uid:S.uid,date:t,ts}))
           && await W(()=>S.db.doc('posts/'+id).set({uid:S.uid,date:t,caption:(E.cap||'').trim().slice(0,200),ts,r:{},live:!!E.live}));
-  if (ok){ closeEditor(); S.tab='hoy'; renderAll(); confetti(90); toast('¡Foto subida! Hoy te libras 😎'); }
+  if (ok){ closeEditor(); S.tab='hoy'; renderAll(); confetti(90); buzz([30,50,30]); toast('¡Foto subida! Hoy te libras 😎'); }
   else { btn.disabled=false; btn.textContent='Publicar 🚀'; }
 }
 
@@ -1277,6 +1465,7 @@ renderAll();
     if (!snap.metadata.fromCache){ S.loaded.posts=true; clearTimeout(timer); S.slow=false; }
     renderAll();
   }, onErr);
+  db.collection('comentarios').onSnapshot(snap=>{ const c={}; snap.docs.forEach(d=>{ c[d.id]=d.data(); }); S.coms=c; if (S.comDraw) S.comDraw(); if (S.tab==='hoy') renderMain(); }, onErr);
   db.collection('eventos').onSnapshot(snap=>{ const ev={}; snap.docs.forEach(d=>{ ev[d.id]=d.data(); }); S.eventos=ev; if (S.tab==='cnt'||S.tab==='rank') renderAll(); }, onErr);
   db.collection('castigos').onSnapshot(snap=>{ const c={}; snap.docs.forEach(d=>{ c[d.id]=d.data(); }); S.castigos=c; renderAll(); }, onErr);
   db.doc('config/main').onSnapshot(s=>{ S.config = s.exists ? s.data() : null; renderAll(); }, onErr);
