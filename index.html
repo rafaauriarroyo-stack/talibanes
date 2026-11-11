@@ -6,7 +6,7 @@
 <title>Talibanes</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bangers&family=Inter:wght@400;600;800&family=Pacifico&family=Permanent+Marker&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bangers&family=Outfit:wght@400;500;600;700;800&family=Pacifico&family=Permanent+Marker&family=Unbounded:wght@500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#0f0f12">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -296,6 +296,81 @@ header.top{margin:0 -14px;padding:14px 14px 10px;background:linear-gradient(rgba
 .empty{border-radius:20px}
 
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* ================= v4: tipografía + interfaz ================= */
+:root{--fd:'Unbounded',system-ui,sans-serif;--fb:'Outfit',system-ui,sans-serif;--glass:rgba(255,255,255,.045);--edge:rgba(255,255,255,.09)}
+html,body,input,textarea,select,button{font-family:var(--fb)}
+body{font-size:15.5px;letter-spacing:.1px}
+.logo{font-family:var(--fd);font-weight:900;font-size:25px;letter-spacing:-.5px;background:linear-gradient(100deg,#d8ff5a 0%,#c6ff3d 35%,#3dd9ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;filter:drop-shadow(2px 2px 0 #ff3da5)}
+.clock{background:var(--glass);border:1px solid var(--edge);padding:6px 11px;border-radius:14px;font-size:11px}
+.clock b{font-family:var(--fd);font-weight:700;font-size:13px}
+.hero h2,.sec,.modal h3,.slot,.ed .eh .t,.ccard .cn,.pod .blk span{font-family:var(--fd);letter-spacing:-.3px}
+.hero h2{font-weight:800;font-size:21px;margin-bottom:6px}
+.hero p{font-size:15px}
+.sec{font-weight:700;font-size:17px;margin:22px 0 12px}
+.sec small{font-family:var(--fb);font-size:12px}
+.sec::after{content:"";flex:1;height:1px;margin-left:10px;align-self:center;background:linear-gradient(90deg,rgba(255,255,255,.14),transparent)}
+.modal h3{font-weight:800;font-size:20px;color:var(--lime);text-shadow:0 0 22px rgba(198,255,61,.25)}
+.slot{font-weight:700;font-size:17px;line-height:1.35;border-radius:20px;background:radial-gradient(circle at 50% 0%,rgba(255,210,61,.14),#111 70%)}
+.ed .eh .t{font-weight:800;font-size:15px}
+.ccard .cn{font-weight:800;font-size:26px;margin:4px 0 2px}
+.pod .blk span{font-weight:900;font-size:24px}
+
+/* tarjetas con borde degradado */
+.post,.day,.row,.ccard,.empty,.rank,.listc li,.modal{border:1px solid transparent!important;background:linear-gradient(160deg,#1d1d25,#16161c) padding-box,linear-gradient(150deg,rgba(255,255,255,.16),rgba(255,255,255,.03) 45%,rgba(255,61,165,.18)) border-box!important}
+.hero{border:1px solid transparent!important;background:linear-gradient(150deg,#22222b,#17171d 70%) padding-box,linear-gradient(140deg,rgba(255,255,255,.18),rgba(255,255,255,.03) 50%,rgba(61,217,255,.25)) border-box!important;padding:20px}
+.hero.warn{background:radial-gradient(120% 90% at 0% 0%,rgba(255,61,165,.30),transparent 60%) padding-box,linear-gradient(150deg,#26131f,#17141b 70%) padding-box,linear-gradient(140deg,rgba(255,61,165,.75),rgba(255,61,165,.06) 50%,rgba(255,106,61,.5)) border-box!important}
+.hero.ok{background:radial-gradient(120% 90% at 0% 0%,rgba(198,255,61,.22),transparent 60%) padding-box,linear-gradient(150deg,#1b2110,#16181a 70%) padding-box,linear-gradient(140deg,rgba(198,255,61,.7),rgba(198,255,61,.05) 50%,rgba(61,217,255,.45)) border-box!important}
+.ccard.on{background:radial-gradient(100% 80% at 50% 0%,rgba(255,61,165,.28),transparent 70%) padding-box,linear-gradient(160deg,#241823,#16161c) padding-box,linear-gradient(150deg,#ff3da5,rgba(255,61,165,.1) 60%,#ff6a3d) border-box!important}
+.ccard{border-radius:20px;padding:14px 6px}
+.ccard .cl{font-weight:700;font-size:12.5px}
+.row{border-radius:18px;padding:12px 14px}
+.day{border-radius:20px;padding:14px}
+.rank{border-radius:20px;border-collapse:separate;border-spacing:0}
+.rank th{font-family:var(--fd);font-weight:500;font-size:10px;letter-spacing:.3px;text-transform:uppercase}
+.rank td b{font-family:var(--fd);font-weight:700}
+
+/* botones */
+.btn{font-weight:700;letter-spacing:.2px;border-radius:16px;background:linear-gradient(135deg,#e2ff6b,#a8ff3d);color:#101010}
+.btn.big{border-radius:18px;font-size:17px}
+.btn.ghost{background:var(--glass);border:1px solid var(--edge);color:var(--txt)}
+.inp{background:rgba(255,255,255,.05);border:1px solid var(--edge);border-radius:14px;transition:border-color .2s,box-shadow .2s}
+.inp:focus{border-color:var(--lime);box-shadow:0 0 0 4px rgba(198,255,61,.12)}
+.x{background:var(--glass);border:1px solid var(--edge)}
+
+/* fotos */
+.post .hd{padding:12px 14px}
+.post .hd .nm{font-weight:700;font-size:15px}
+.post .hd img,.row img.av,.rank td.n img{padding:2px;background:conic-gradient(from 200deg,var(--lime),var(--cyan),var(--pink),var(--lime));border-radius:50%}
+.post .phw{margin:0 10px;border-radius:18px}
+.post .ph{border-radius:18px}
+.post .cap{padding:12px 16px 0;font-size:15.5px}
+.reacts{padding:12px 12px 14px;gap:7px}
+.reacts button{background:var(--glass);border:1px solid var(--edge);padding:6px 11px;border-radius:999px}
+.reacts button.on{background:rgba(198,255,61,.12);border-color:rgba(198,255,61,.55)}
+.thumbs{gap:8px}.thumbs .t{border-radius:14px}
+
+/* chips con anillo */
+.chip{width:70px;font-weight:600}
+.chip .av{width:56px;height:56px;border:0!important;padding:3px;background:rgba(255,255,255,.08)}
+.chip.done .av{background:conic-gradient(from 0deg,var(--lime),var(--cyan),var(--lime))}
+.chip.miss .av{background:conic-gradient(from 0deg,var(--pink),#ff6a3d,var(--pink));filter:grayscale(.35)}
+.prog{font-weight:600}
+
+/* dock flotante */
+.app{padding-bottom:130px}
+.tabs{left:50%;right:auto;bottom:calc(10px + env(safe-area-inset-bottom));transform:translateX(-50%);width:calc(100% - 20px);max-width:620px;border-radius:26px;border:1px solid var(--edge);padding:6px;background:rgba(20,20,26,.78);box-shadow:0 22px 50px -12px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.06)}
+.tabs button{border-radius:20px;font-weight:600;font-size:10.5px;padding:8px 2px}
+.tabs button.on{color:var(--txt)}
+.tabs button.on::before{inset:0;border-radius:20px;background:linear-gradient(160deg,rgba(198,255,61,.22),rgba(61,217,255,.12))}
+.toast{bottom:104px;border-radius:16px;font-weight:600;background:linear-gradient(135deg,#fff,#eafff0)}
+.seg{background:var(--glass);border:1px solid var(--edge)!important;border-radius:16px}
+.seg button{border-radius:12px}
+.seg button.on{background:linear-gradient(160deg,rgba(255,255,255,.14),rgba(255,255,255,.06))}
+.banner{border-radius:16px}
+.tag{font-family:var(--fd);font-weight:700;font-size:9.5px;letter-spacing:.3px}
+.ttabs button{font-weight:700}
+.fonts button{font-size:15px}
 </style>
 </head>
 <body>
@@ -385,13 +460,37 @@ const DEFAULT_CASTIGOS = [
   '20 flexiones grabadas en vídeo',
   'Manda un piropo personalizado a cada uno del grupo',
   'Un día entero firmando cada mensaje con "perdón por fallar 🙏"',
-  'Le toca organizar y reservar el próximo plan'
+  'Le toca organizar y reservar el próximo plan',
+  'Invita a un cubata a quien elija el grupo',
+  'Paga la ronda de chupitos de la próxima fiesta',
+  'Fondo de pantalla del móvil elegido por el grupo durante 3 días',
+  'Audio diciendo "soy el más vago de los Talibanes"',
+  'Imita a alguien del grupo en un vídeo de 30 segundos',
+  'Tu nombre en el grupo de WhatsApp lo eligen los demás durante 48 h',
+  'Story bailando 15 segundos la canción que elija el grupo',
+  'Escribe un poema de 4 versos dedicado al grupo',
+  'Ve a la próxima quedada con la camiseta que elija el grupo',
+  'Trae comida casera a la próxima quedada',
+  'Haces de camarero en la próxima quedada',
+  'Mañana subes 2 fotos en vez de 1',
+  'Una semana poniendo 🔥 a todas las fotos del grupo',
+  'Un día respondiendo "sí, mi rey" a todo en el grupo',
+  'Canta una canción entera en la próxima quedada',
+  'Audio pidiendo perdón en modo dramático (1 minuto)',
+  '24 h hablando en el grupo solo con emojis',
+  'Gafas de sol durante toda la próxima quedada',
+  'Foto con la cara pintada como decida el grupo',
+  'Recoges y limpias después de la próxima quedada',
+  '50 sentadillas grabadas en vídeo',
+  'Bailas en la próxima fiesta la canción que elija el grupo',
+  'Le debes un favor a quien elija el grupo',
+  'Llevas el bocadillo/merienda de todos en el próximo plan'
 ];
 const DEFAULT_CONTADORES = [{k:'cubatas',e:'🥃',n:'Cubatas'},{k:'salidas',e:'🪩',n:'Salir de fiesta'},{k:'besos',e:'💋',n:'Besos'}];
 const REACTS = ['🔥','😂','💀','👑','🤡','❤️'];
 const STICKERS = ['🔥','😂','💀','👑','🍺','🍻','🎉','😎','🤡','💩','❤️','🥵','🫡','👀','🤙','🍕','⭐','💯','🐐','🌚','😈','🥳','🤯','😭','💪','🙏','✌️','🫶','☀️','🌈','⚡','💥','🎂','⚽','🏆','🎮','🍔','🌮','🍟','🍷','🥂','🚀','📸','💅','🧢','🕶️','🦄','🐸','💤','🤓','🥶','🤑','👻','🍆','🍑','💦','🌶️','🧠','🫠','🤌'];
 const COLORS = ['#ffffff','#111111','#c6ff3d','#ff3da5','#3dd9ff','#ffd23d','#ff5a36','#8b5cff'];
-const FONTS = ['Bangers','Permanent Marker','Pacifico','Anton','Inter'];
+const FONTS = ['Unbounded','Bangers','Permanent Marker','Pacifico','Anton','Outfit'];
 const FILTERS = [['none','Original'],['pop','Pop'],['calido','Cálido'],['frio','Frío'],['vintage','Vintage'],['sepia','Sepia'],['bn','B/N'],['noir','Noir'],['rosa','Rosita'],['acido','Ácido']];
 const FRAMES = [['none','Sin marco'],['polaroid','Polaroid'],['banner','Banda TALIBANES'],['sello','Sello'],['neon','Neón'],['cine','Cine']];
 
@@ -728,7 +827,7 @@ function renderCnt(m){
     h('span',{style:'width:22px;text-align:center;font-weight:800',text:(i===0&&x.n>0)?'👑':String(i+1)}),
     h('img',{class:'av',src:avatarOf(x.u),alt:''}),
     h('div',{class:'mid'}, h('b',{text:nameOf(x.u)}), h('div',{class:'bar',style:'margin-top:6px'}, barI(x.n/max*100))),
-    h('div',{style:'font-family:Bangers,cursive;font-size:26px;min-width:34px;text-align:right',text:x.n}))));
+    h('div',{style:'font-family:Unbounded,sans-serif;font-weight:800;font-size:20px;min-width:34px;text-align:right',text:x.n}))));
   // actividad
   const recent=all.filter(e=>e.tipo===c.k && inRange(e,S.cntRange)).sort((a,b)=> b.date.localeCompare(a.date) || (b.ts||0)-(a.ts||0)).slice(0,40);
   m.append(h('div',{class:'sec'},'Últimos', h('small',{text:recent.length?'':'nada todavía'})));
@@ -846,7 +945,7 @@ function ruleta(date, uid){
 
 /* ---------------- editor ---------------- */
 const E = { ov:null, cv:null, ctx:null, img:null, base:null, W:0, H:0, filter:'none', frame:'none', objs:[], strokes:[], sel:-1,
-  mode:'move', tool:'filtros', brush:{color:'#ff3da5',size:14}, txt:{font:'Bangers',color:'#ffffff',outline:true},
+  mode:'move', tool:'filtros', brush:{color:'#ff3da5',size:14}, txt:{font:'Unbounded',color:'#ffffff',outline:true},
   hist:[], ptrs:new Map(), drag:null, pinch:null, cur:null, moved:false, cap:'' };
 
 function openEditor(){
@@ -949,7 +1048,7 @@ function undo(){
   if (fchg) applyFilter(); renderEditor();
 }
 const emojiFont = s => `${s}px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif`;
-const txtFont = o => `${o.font==='Inter'?'800 ':''}${o.s}px "${o.font}", sans-serif`;
+const txtFont = o => `${o.font==='Unbounded'?'900 ':o.font==='Outfit'||o.font==='Inter'?'800 ':''}${o.s}px "${o.font}", sans-serif`;
 function objBox(ctx,o){
   if (o.t==='e') return {w:o.s*1.25,h:o.s*1.25};
   ctx.save(); ctx.font=txtFont(o); const lines=o.text.split('\n'); let w=0; for (const l of lines) w=Math.max(w,ctx.measureText(l).width); ctx.restore();
@@ -983,13 +1082,13 @@ function drawFrame(ctx,w,hh,name){
     ctx.fillText('Talibanes · '+ds, w/2, hh-bb/2);
   } else if (name==='banner'){
     const bh=u*.13; ctx.fillStyle='#c6ff3d'; ctx.fillRect(0,0,w,bh); ctx.fillStyle='#ff3da5'; ctx.fillRect(0,bh,w,u*.012);
-    ctx.fillStyle='#111'; ctx.textBaseline='middle'; ctx.font=`${bh*.72}px Bangers, cursive`; ctx.textAlign='left'; ctx.fillText('TALIBANES', u*.04, bh*.54);
-    ctx.textAlign='right'; ctx.font=`800 ${bh*.3}px Inter, sans-serif`; ctx.fillText(ds, w-u*.04, bh*.54);
+    ctx.fillStyle='#111'; ctx.textBaseline='middle'; ctx.font=`900 ${bh*.5}px Unbounded, sans-serif`; ctx.textAlign='left'; ctx.fillText('TALIBANES', u*.04, bh*.54);
+    ctx.textAlign='right'; ctx.font=`800 ${bh*.3}px Outfit, sans-serif`; ctx.fillText(ds, w-u*.04, bh*.54);
   } else if (name==='sello'){
     const R=u*.15; ctx.translate(w-R*1.25, hh-R*1.25); ctx.rotate(-.25); ctx.globalAlpha=.85; ctx.strokeStyle='#e0262f'; ctx.fillStyle='#e0262f';
     ctx.lineWidth=R*.08; ctx.beginPath(); ctx.arc(0,0,R,0,Math.PI*2); ctx.stroke(); ctx.lineWidth=R*.03; ctx.beginPath(); ctx.arc(0,0,R*.82,0,Math.PI*2); ctx.stroke();
-    ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.font=`${R*.42}px Bangers, cursive`; ctx.fillText('TALIBANES',0,-R*.12);
-    ctx.font=`800 ${R*.18}px Inter, sans-serif`; ctx.fillText(ds,0,R*.3); ctx.fillText('★ CUMPLIDO ★',0,R*.55);
+    ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.font=`900 ${R*.24}px Unbounded, sans-serif`; ctx.fillText('TALIBANES',0,-R*.12);
+    ctx.font=`800 ${R*.18}px Outfit, sans-serif`; ctx.fillText(ds,0,R*.3); ctx.fillText('★ CUMPLIDO ★',0,R*.55);
   } else if (name==='neon'){
     const m=u*.03; ctx.lineWidth=u*.012; ctx.shadowBlur=u*.04;
     ctx.strokeStyle='#ff3da5'; ctx.shadowColor='#ff3da5'; ctx.strokeRect(m,m,w-2*m,hh-2*m);
@@ -1113,7 +1212,7 @@ function renderToolsOnly(){
     const add=()=>{ addText(inp.value); inp.value=''; };
     inp.addEventListener('keydown',e=>{ if(e.key==='Enter') add(); });
     p.append(h('div',{class:'addrow',style:'margin-top:0'}, inp, h('button',{class:'btn',onclick:add},'Añadir')));
-    p.append(h('div',{class:'fonts'}, FONTS.map(f=>h('button',{class:E.txt.font===f?'on':'',style:`font-family:"${f}"`,onclick:()=>{ E.txt.font=f; const o=E.objs[E.sel]; if(o&&o.t==='t'){o.font=f;pushHist();redraw();} renderToolsOnly(); }},f==='Inter'?'Normal':f))));
+    p.append(h('div',{class:'fonts'}, FONTS.map(f=>h('button',{class:E.txt.font===f?'on':'',style:`font-family:"${f}"`,onclick:()=>{ E.txt.font=f; const o=E.objs[E.sel]; if(o&&o.t==='t'){o.font=f;pushHist();redraw();} renderToolsOnly(); }},f==='Outfit'?'Normal':f))));
     const ol=h('input',{type:'checkbox'}); ol.checked=E.txt.outline; ol.onchange=()=>{ E.txt.outline=ol.checked; const o=E.objs[E.sel]; if(o&&o.t==='t'){o.outline=ol.checked;pushHist();redraw();} };
     p.append(h('div',{class:'sw'}, COLORS.map(c=>h('button',{class:E.txt.color===c?'on':'',style:`background:${c}`,onclick:()=>{ E.txt.color=c; const o=E.objs[E.sel]; if(o&&o.t==='t'){o.color=c;pushHist();redraw();} renderToolsOnly(); }})), h('label',{class:'toggle'}, ol, 'Borde')));
     const t=today(); const n = S.uid ? Object.values(S.posts).filter(x=>x.uid===S.uid).length+ (S.posts[pid(t,S.uid)]?0:1) : 1;
